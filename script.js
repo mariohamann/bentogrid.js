@@ -9,7 +9,7 @@ class Bento {
         placeholders: "",
         aspectRatio: 1 / 1,
         breakpoints: [],
-        swapPlaceholders: true,
+        balancePlacehodlers: true,
       },
       ...userConfig
     };
@@ -19,7 +19,7 @@ class Bento {
     this.prevColumnCount = null;
 
     this.setupGrid();
-    this.initializeGridItems();
+    this.updateGrid();
 
     this.handleResponsiveBehavior();
   }
@@ -54,7 +54,7 @@ class Bento {
     placeholders.forEach((placeholder) => placeholder.remove());
   }
 
-  initializeGridItems() {
+  updateGrid() {
     const totalColumns = this.setupGrid();
 
     if (this.prevTotalColumns !== totalColumns) {
@@ -188,7 +188,7 @@ class Bento {
             occupyPosition(column, row, gridColumnSpan, gridRowSpan);
 
             // Swap the placeholder element with an existing element of the same size, if available
-            if (this.config.swapPlaceholders) {
+            if (this.config.balancePlacehodlers) {
               const sameSizeElement = Array.from(this.gridItems).find((item) => {
                 const gridColumnStart = parseInt(item.style.gridColumn.split(" / ")[0]);
                 const gridRowStart = parseInt(item.style.gridRow.split(" / ")[0]);
@@ -219,6 +219,8 @@ class Bento {
     addPlaceholders();
 
     this.prevTotalColumns = totalColumns;
+
+    this.emitCalculationDoneEvent();
   }
 
   handleResponsiveBehavior() {
@@ -227,7 +229,7 @@ class Bento {
       this.resizeObserver._timeoutId = setTimeout(() => {
         const currentColumnCount = this.setupGrid();
         if (currentColumnCount !== this.prevColumnCount) {
-          this.initializeGridItems();
+          this.updateGrid();
         }
         this.prevColumnCount = currentColumnCount;
       }, 10);
@@ -237,7 +239,16 @@ class Bento {
   }
 
   recalculate() {
-    this.initializeGridItems();
+    this.updateGrid();
+  }
+
+  emitCalculationDoneEvent() {
+    const calculationDoneEvent = new CustomEvent("calculationDone", {
+      detail: {
+        gridContainer: this.gridContainer,
+      },
+    });
+    this.gridContainer.dispatchEvent(calculationDoneEvent);
   }
 }
 
@@ -268,5 +279,11 @@ const myBento = new Bento({
     }
   ],
   aspectRatio: 1, // Users can set their own aspect ratio for a cell (not an item) (width / height)
-  swapPlaceholders: true
+  balancePlacehodlers: true
+});
+
+const gridContainer = document.querySelector('.grid-container');
+
+gridContainer.addEventListener("calculationDone", (event) => {
+  console.log("Calculation done for", event.detail.gridContainer);
 });
