@@ -9,7 +9,7 @@
   </head>
 
   <body>
-    <div class="bentogrid">
+    <div class="bento-grid">
       <div data-bento="1x4">1x4</div>
       <div data-bento="2x1">2x1</div>
       <div data-bento="1x2">1x2</div>
@@ -62,7 +62,7 @@
         balancePlaceholders: true
       });
 
-      const gridContainer = document.querySelector('.bentogrid');
+      const gridContainer = document.querySelector('.bento-grid');
 
       gridContainer.addEventListener("calculationDone", (event) => {
         console.log("Calculation done for", event.detail.gridContainer);

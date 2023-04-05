@@ -2,7 +2,7 @@ class BentoGrid {
   constructor(userConfig) {
     this.config = {
       ...{
-        target: ".bentogrid",
+        target: ".bento-grid",
         columns: null,
         cellWidth: { min: 100, max: 150 },
         itemSpacing: 10,
@@ -213,7 +213,7 @@ class BentoGrid {
               placeholder = document.createElement("div");
             }
 
-            placeholder.classList.add("bentogrid-placeholder");
+            placeholder.classList.add("bento-grid-placeholder");
             placeholder.style.gridColumn = `${column + 1
               } / span ${gridColumnSpan}`;
             placeholder.style.gridRow = `${row + 1} / span ${gridRowSpan}`;
