@@ -10,19 +10,24 @@ const defaultConfig = {
 };
 
 
-function Bento(userConfig) {
-  const config = { ...defaultConfig, ...userConfig }; // Merge the user's configuration with the default configuration
+class Bento {
+  constructor(userConfig) {
+    this.config = { ...defaultConfig, ...userConfig };
+    this.gridContainer = document.querySelector(this.config.target);
+    this.gridItems = this.gridContainer.querySelectorAll(":scope > *");
+    this.prevTotalColumns = null;
+    this.prevColumnCount = null;
 
-  const gridContainer = document.querySelector(config.target);
-  const gridItems = gridContainer.querySelectorAll(":scope > *");
+    this.setupGrid();
+    this.initializeGridItems();
 
-  let prevTotalColumns;
-  let prevColumnCount = null;
+    this.handleResponsiveBehavior();
+  }
 
-  function getBreakpoint() {
+  getBreakpoint() {
     const width = window.innerWidth;
-    let activeBreakpoint = { ...config };
-    for (const breakpoint of config.breakpoints) {
+    let activeBreakpoint = { ...this.config };
+    for (const breakpoint of this.config.breakpoints) {
       if (width >= breakpoint.minWidth) {
         activeBreakpoint = { ...activeBreakpoint, ...breakpoint };
       }
@@ -30,30 +35,30 @@ function Bento(userConfig) {
     return activeBreakpoint;
   }
 
-  function setupGrid() {
-    const breakpoint = getBreakpoint();
+  setupGrid() {
+    const breakpoint = this.getBreakpoint();
     const totalColumns =
       breakpoint.columns ||
       Math.floor(
-        (gridContainer.clientWidth + breakpoint.itemSpacing) /
+        (this.gridContainer.clientWidth + breakpoint.itemSpacing) /
         (breakpoint.cellWidth.min + breakpoint.itemSpacing)
       );
-    gridContainer.style.display = "grid";
-    gridContainer.style.gridTemplateColumns = `repeat(${totalColumns}, minmax(${breakpoint.cellWidth.min}px, 1fr))`;
-    gridContainer.style.gridGap = `${breakpoint.itemSpacing}px`;
+    this.gridContainer.style.display = "grid";
+    this.gridContainer.style.gridTemplateColumns = `repeat(${totalColumns}, minmax(${breakpoint.cellWidth.min}px, 1fr))`;
+    this.gridContainer.style.gridGap = `${breakpoint.itemSpacing}px`;
     return totalColumns;
   }
 
-  function removePlaceholders() {
-    const placeholders = gridContainer.querySelectorAll(config.placeholders);
+  removePlaceholders() {
+    const placeholders = this.gridContainer.querySelectorAll(this.config.placeholders);
     placeholders.forEach((placeholder) => placeholder.remove());
   }
 
-  function initializeGridItems() {
-    const totalColumns = setupGrid();
+  initializeGridItems() {
+    const totalColumns = this.setupGrid();
 
-    if (prevTotalColumns !== totalColumns) {
-      removePlaceholders();
+    if (this.prevTotalColumns !== totalColumns) {
+      this.removePlaceholders();
     }
 
     const gridMatrix = [];
@@ -106,7 +111,7 @@ function Bento(userConfig) {
       }
     }
 
-    gridItems.forEach((item) => {
+    this.gridItems.forEach((item) => {
       const bento = item.getAttribute("data-bento").split("x");
       const gridColumnSpan = parseInt(bento[0]);
       const gridRowSpan = parseInt(bento[1]);
@@ -127,12 +132,12 @@ function Bento(userConfig) {
     });
 
 
-    const breakpoint = getBreakpoint();
+    const breakpoint = this.getBreakpoint();
 
-    gridContainer.style.gridTemplateRows = `repeat(${maxRow}, minmax(${breakpoint.cellWidth.min}px, 1fr))`;
+    this.gridContainer.style.gridTemplateRows = `repeat(${maxRow}, minmax(${breakpoint.cellWidth.min}px, 1fr))`;
 
     // Find the maximum row
-    gridItems.forEach((item) => {
+    this.gridItems.forEach((item) => {
       const gridRowStart = parseInt(item.style.gridRow.split(" / ")[0]);
       const gridRowSpan = parseInt(
         item.style.gridRow.split(" / ")[1].split(" ")[1]
@@ -141,11 +146,11 @@ function Bento(userConfig) {
     });
 
     let placeholders = [];
-    if (config.placeholders) {
-      placeholders = Array.from(document.querySelectorAll(config.placeholders));
+    if (this.config.placeholders) {
+      placeholders = Array.from(document.querySelectorAll(this.config.placeholders));
     }
 
-    function addDummyElements() {
+    const addDummyElements = () => {
       for (let row = 0; row < maxRow; row++) {
         for (let column = 0; column < totalColumns; column++) {
           if (!gridMatrix[column][row]) {
@@ -177,14 +182,14 @@ function Bento(userConfig) {
             dummyElement.style.gridColumn = `${column + 1
               } / span ${gridColumnSpan}`;
             dummyElement.style.gridRow = `${row + 1} / span ${gridRowSpan}`;
-            gridContainer.appendChild(dummyElement);
+            this.gridContainer.appendChild(dummyElement);
 
             // Update gridMatrix
             occupyPosition(column, row, gridColumnSpan, gridRowSpan);
 
             // Swap the dummy element with an existing element of the same size, if available
-            if (config.swapPlaceholders) {
-              const sameSizeElement = Array.from(gridItems).find((item) => {
+            if (this.config.swapPlaceholders) {
+              const sameSizeElement = Array.from(this.gridItems).find((item) => {
                 const gridColumnStart = parseInt(item.style.gridColumn.split(" / ")[0]);
                 const gridRowStart = parseInt(item.style.gridRow.split(" / ")[0]);
                 const gridColumnEnd = parseInt(item.style.gridColumn.split(" / ")[1].split(" ")[1]);
@@ -213,31 +218,30 @@ function Bento(userConfig) {
 
     addDummyElements();
 
-    prevTotalColumns = totalColumns;
+    this.prevTotalColumns = totalColumns;
   }
 
-  // Initialize the grid
-  setupGrid();
+  handleResponsiveBehavior() {
+    this.resizeObserver = new ResizeObserver(() => {
+      clearTimeout(this.resizeObserver._timeoutId);
+      this.resizeObserver._timeoutId = setTimeout(() => {
+        const currentColumnCount = this.setupGrid();
+        if (currentColumnCount !== this.prevColumnCount) {
+          this.initializeGridItems();
+        }
+        this.prevColumnCount = currentColumnCount;
+      }, 10);
+    });
 
-  // Initialize grid items
-  initializeGridItems();
+    this.resizeObserver.observe(this.gridContainer);
+  }
 
-  // Handle responsive behavior
-  const resizeObserver = new ResizeObserver(() => {
-    clearTimeout(resizeObserver._timeoutId);
-    resizeObserver._timeoutId = setTimeout(() => {
-      const currentColumnCount = setupGrid();
-      if (currentColumnCount !== prevColumnCount) {
-        initializeGridItems();
-      }
-      prevColumnCount = currentColumnCount;
-    }, 10);
-  });
-
-  resizeObserver.observe(gridContainer);
+  recalculate() {
+    this.initializeGridItems();
+  }
 }
 
-Bento({
+const myBento = new Bento({
   target: ".grid-container",
   placeholders: ".grid-item-dummy", // selects elements that should be used as placeholders and should loop through them
   cellWidth: {
