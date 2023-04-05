@@ -1,4 +1,18 @@
-function Bento(config) {
+const defaultConfig = {
+  target: "",
+  columns: null,
+  cellWidth: { min: 100, max: 150 },
+  itemSpacing: 10,
+  placeholders: "",
+  aspectRatio: 1 / 1,
+  breakpoints: [],
+  swapPlaceholders: true,
+};
+
+
+function Bento(userConfig) {
+  const config = { ...defaultConfig, ...userConfig }; // Merge the user's configuration with the default configuration
+
   const gridContainer = document.querySelector(config.target);
   const gridItems = gridContainer.querySelectorAll(":scope > *");
 
@@ -131,8 +145,6 @@ function Bento(config) {
     }
 
     function addDummyElements() {
-      let currentPlaceholderIndex = 0;
-
       for (let row = 0; row < maxRow; row++) {
         for (let column = 0; column < totalColumns; column++) {
           if (!gridMatrix[column][row]) {
@@ -159,25 +171,40 @@ function Bento(config) {
               }
             }
 
-            // Clone the current placeholder
-            const dummyElement = placeholders[
-              currentPlaceholderIndex
-            ].cloneNode(true);
-
-            // Position the cloned placeholder
+            const dummyElement = document.createElement("div");
+            dummyElement.className = "grid-item grid-item-dummy";
             dummyElement.style.gridColumn = `${column + 1
               } / span ${gridColumnSpan}`;
             dummyElement.style.gridRow = `${row + 1} / span ${gridRowSpan}`;
-
-            // Add the cloned placeholder to the grid
             gridContainer.appendChild(dummyElement);
 
             // Update gridMatrix
             occupyPosition(column, row, gridColumnSpan, gridRowSpan);
 
-            // Update the current placeholder index, looping back to the first placeholder if needed
-            currentPlaceholderIndex =
-              (currentPlaceholderIndex + 1) % placeholders.length;
+            // Swap the dummy element with an existing element of the same size, if available
+            if (config.swapPlaceholders) {
+              const sameSizeElement = Array.from(gridItems).find((item) => {
+                const gridColumnStart = parseInt(item.style.gridColumn.split(" / ")[0]);
+                const gridRowStart = parseInt(item.style.gridRow.split(" / ")[0]);
+                const gridColumnEnd = parseInt(item.style.gridColumn.split(" / ")[1].split(" ")[1]);
+                const gridRowEnd = parseInt(item.style.gridRow.split(" / ")[1].split(" ")[1]);
+
+                return (
+                  gridColumnEnd === gridColumnSpan &&
+                  gridRowEnd === gridRowSpan &&
+                  (gridColumnStart !== column + 1 || gridRowStart !== row + 1)
+                );
+              });
+
+              if (sameSizeElement) {
+                const originalGridColumn = sameSizeElement.style.gridColumn;
+                const originalGridRow = sameSizeElement.style.gridRow;
+                sameSizeElement.style.gridColumn = dummyElement.style.gridColumn;
+                sameSizeElement.style.gridRow = dummyElement.style.gridRow;
+                dummyElement.style.gridColumn = originalGridColumn;
+                dummyElement.style.gridRow = originalGridRow;
+              }
+            }
           }
         }
       }
@@ -231,5 +258,6 @@ Bento({
       itemSpacing: 10
     }
   ],
-  aspectRatio: 1 // Users can set their own aspect ratio for a cell (not an item) (width / height)
+  aspectRatio: 1, // Users can set their own aspect ratio for a cell (not an item) (width / height)
+  swapPlaceholders: true
 });
