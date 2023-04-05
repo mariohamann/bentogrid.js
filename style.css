@@ -3,7 +3,7 @@ html {
 	width: 100%;
 }
 
-#bentogrid > * {
+.bentogrid > * {
 	border: 1px solid black;
 	padding: 10px;
 	font-size: 14px;

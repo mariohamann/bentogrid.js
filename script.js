@@ -2,7 +2,7 @@ class Bento {
   constructor(userConfig) {
     this.config = {
       ...{
-        target: "",
+        target: ".bentogrid",
         columns: null,
         cellWidth: { min: 100, max: 150 },
         itemSpacing: 10,
@@ -11,7 +11,11 @@ class Bento {
         balancePlaceholders: true,
       },
       ...userConfig
-    };
+    };  // Check if config.target is a string or an HTMLElement
+    this.gridContainer =
+      typeof this.config.target === "string"
+        ? document.querySelector(this.config.target)
+        : this.config.target;
     this.gridContainer = document.querySelector(this.config.target);
     // Grid items with the 'data-bento' attribute
     this.gridItems = Array.from(
@@ -283,7 +287,6 @@ class Bento {
 }
 
 const myBento = new Bento({
-  target: "#bentogrid",
   cellWidth: {
     min: 100,
     max: 150
@@ -307,11 +310,11 @@ const myBento = new Bento({
       itemSpacing: 10
     }
   ],
-  aspectRatio: 1, // Users can set their own aspect ratio for a cell (not an item) (width / height)
+  aspectRatio: 1 / 1, // Users can set their own aspect ratio for a cell (not an item) (width / height)
   balancePlaceholders: true
 });
 
-const gridContainer = document.querySelector('#bentogrid');
+const gridContainer = document.querySelector('.bentogrid');
 
 gridContainer.addEventListener("calculationDone", (event) => {
   console.log("Calculation done for", event.detail.gridContainer);
