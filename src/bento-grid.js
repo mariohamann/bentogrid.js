@@ -317,37 +317,3 @@ class BentoGrid {
     this.gridContainer.dispatchEvent(calculationDoneEvent);
   }
 }
-
-const myBento = new BentoGrid({
-  cellWidth: {
-    min: 100,
-    max: 150
-  }, // a cell of the grid, not an item in the grid
-  itemSpacing: 10,
-  breakpoints: [
-    {
-      minWidth: 480,
-      cellWidth: {
-        min: 150,
-        max: 200
-      },
-      itemSpacing: 5
-    },
-    {
-      minWidth: 768,
-      cellWidth: {
-        min: 200,
-        max: 250
-      },
-      itemSpacing: 10
-    }
-  ],
-  aspectRatio: 1 / 1, // Users can set their own aspect ratio for a cell (not an item) (width / height)
-  balancePlaceholders: true
-});
-
-const gridContainer = document.querySelector('.bentogrid');
-
-gridContainer.addEventListener("calculationDone", (event) => {
-  console.log("Calculation done for", event.detail.gridContainer);
-});

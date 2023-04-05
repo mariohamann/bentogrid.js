@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>replit</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="bentogrid">
+      <div data-bento="1x4">1x4</div>
+      <div data-bento="2x1">2x1</div>
+      <div data-bento="1x2">1x2</div>
+      <div data-bento="1x2">1x2</div>
+      <div data-bento="1x1">1x1</div>
+      <div data-bento="2x2">2x2</div>
+      <div data-bento="1x4">1x4</div>
+      <div data-bento="2x1">2x1</div>
+      <div data-bento="1x2">1x2</div>
+      <div data-bento="1x2">1x2</div>
+      <div data-bento="1x1">1x1</div>
+      <div data-bento="2x2">2x2</div>
+      <div data-bento="1x4">1x4</div>
+      <div data-bento="2x1">2x1</div>
+      <div data-bento="1x2">1x2</div>
+      <div data-bento="1x2">1x2</div>
+      <div data-bento="1x3">1x3</div>
+      <div data-bento="2x2">2x2</div>
+      <div class="placeholder-1">Placeholder 1</div>
+      <div class="placeholder-2">Placeholder 2</div>
+      <div class="placeholder-3">Placeholder 3</div>
+    </div>
+    <script src="bento-grid.js"></script>
+    <script>
+      const myBento = new BentoGrid({
+        cellWidth: {
+          min: 100,
+          max: 150
+        }, // a cell of the grid, not an item in the grid
+        itemSpacing: 10,
+        breakpoints: [
+          {
+            minWidth: 480,
+            cellWidth: {
+              min: 150,
+              max: 200
+            },
+            itemSpacing: 5
+          },
+          {
+            minWidth: 768,
+            cellWidth: {
+              min: 200,
+              max: 250
+            },
+            itemSpacing: 10
+          }
+        ],
+        aspectRatio: 1 / 1, // Users can set their own aspect ratio for a cell (not an item) (width / height)
+        balancePlaceholders: true
+      });
+
+      const gridContainer = document.querySelector('.bentogrid');
+
+      gridContainer.addEventListener("calculationDone", (event) => {
+        console.log("Calculation done for", event.detail.gridContainer);
+      });
+    </script>
+  </body>
+</html>

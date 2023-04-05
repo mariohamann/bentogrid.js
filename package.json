@@ -1,0 +1,19 @@
+{
+  "name": "bento-grid",
+  "version": "1.0.0",
+  "description": "A responsive, flexible bento grid library.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mariohamann/bento-grid.js.git"
+  },
+  "author": "Mario Hamann, ChatGPT",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mariohamann/bento-grid.js/issues"
+  },
+  "homepage": "https://github.com/mariohamann/bento-grid.js#readme"
+}
