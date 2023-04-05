@@ -17,6 +17,7 @@ function Bento(userConfig) {
   const gridItems = gridContainer.querySelectorAll(":scope > *");
 
   let prevTotalColumns;
+  let prevColumnCount = null;
 
   function getBreakpoint() {
     const width = window.innerWidth;
@@ -225,7 +226,11 @@ function Bento(userConfig) {
   const resizeObserver = new ResizeObserver(() => {
     clearTimeout(resizeObserver._timeoutId);
     resizeObserver._timeoutId = setTimeout(() => {
-      initializeGridItems();
+      const currentColumnCount = setupGrid();
+      if (currentColumnCount !== prevColumnCount) {
+        initializeGridItems();
+      }
+      prevColumnCount = currentColumnCount;
     }, 10);
   });
 
