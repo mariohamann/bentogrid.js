@@ -173,6 +173,7 @@ class Bento {
 
     const addPlaceholders = () => {
       let placeholderIndex = 0;
+      let lastPlaceholderPositions = [];
 
       for (let row = 0; row < maxRow; row++) {
         for (let column = 0; column < totalColumns; column++) {
@@ -223,7 +224,7 @@ class Bento {
 
             // Swap the placeholder element with an existing element of the same size, if available
             if (this.config.balancePlaceholders) {
-              const sameSizeElement = Array.from(this.gridItems).find((item) => {
+              const availableSwaps = Array.from(this.gridItems).filter((item) => {
                 const gridColumnStart = parseInt(item.style.gridColumn.split(" / ")[0]);
                 const gridRowStart = parseInt(item.style.gridRow.split(" / ")[0]);
                 const gridColumnEnd = parseInt(item.style.gridColumn.split(" / ")[1].split(" ")[1]);
@@ -236,13 +237,44 @@ class Bento {
                 );
               });
 
-              if (sameSizeElement) {
-                const originalGridColumn = sameSizeElement.style.gridColumn;
-                const originalGridRow = sameSizeElement.style.gridRow;
-                sameSizeElement.style.gridColumn = placeholder.style.gridColumn;
-                sameSizeElement.style.gridRow = placeholder.style.gridRow;
+              if (availableSwaps.length > 0) {
+                const getNextPositionDistance = (current, next) => {
+                  return Math.abs(current.column - next.column) + Math.abs(current.row - next.row);
+                };
+
+                const getAverageSwapsDistance = (swaps, newSwap) => {
+                  if (swaps.length === 0) return 0;
+                  const totalDistance = swaps.reduce((sum, swap) => {
+                    return sum + getNextPositionDistance(swap, newSwap);
+                  }, 0);
+                  return totalDistance / swaps.length;
+                };
+
+                const bestSwap = availableSwaps.reduce((best, current) => {
+                  const currentAvgDistance = getAverageSwapsDistance(lastPlaceholderPositions, {
+                    column: parseInt(current.style.gridColumn.split(" / ")[0]) - 1,
+                    row: parseInt(current.style.gridRow.split(" / ")[0]) - 1,
+                  });
+
+                  const bestAvgDistance = getAverageSwapsDistance(lastPlaceholderPositions, {
+                    column: parseInt(best.style.gridColumn.split(" / ")[0]) - 1,
+                    row: parseInt(best.style.gridRow.split(" / ")[0]) - 1,
+                  });
+
+                  return currentAvgDistance > bestAvgDistance ? current : best;
+                }, availableSwaps[0]);
+
+                const originalGridColumn = bestSwap.style.gridColumn;
+                const originalGridRow = bestSwap.style.gridRow;
+                bestSwap.style.gridColumn = placeholder.style.gridColumn;
+                bestSwap.style.gridRow = placeholder.style.gridRow;
                 placeholder.style.gridColumn = originalGridColumn;
                 placeholder.style.gridRow = originalGridRow;
+
+                lastPlaceholderPositions.push({
+                  column: parseInt(placeholder.style.gridColumn.split(" / ")[0]) - 1,
+                  row: parseInt(placeholder.style.gridRow.split(" / ")[0]) - 1,
+                });
               }
             }
           }
