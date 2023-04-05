@@ -1,18 +1,18 @@
-const defaultConfig = {
-  target: "",
-  columns: null,
-  cellWidth: { min: 100, max: 150 },
-  itemSpacing: 10,
-  placeholders: "",
-  aspectRatio: 1 / 1,
-  breakpoints: [],
-  swapPlaceholders: true,
-};
-
-
 class Bento {
   constructor(userConfig) {
-    this.config = { ...defaultConfig, ...userConfig };
+    this.config = {
+      ...{
+        target: "",
+        columns: null,
+        cellWidth: { min: 100, max: 150 },
+        itemSpacing: 10,
+        placeholders: "",
+        aspectRatio: 1 / 1,
+        breakpoints: [],
+        swapPlaceholders: true,
+      },
+      ...userConfig
+    };
     this.gridContainer = document.querySelector(this.config.target);
     this.gridItems = this.gridContainer.querySelectorAll(":scope > *");
     this.prevTotalColumns = null;
