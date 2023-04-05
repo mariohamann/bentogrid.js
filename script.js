@@ -6,18 +6,28 @@ class Bento {
         columns: null,
         cellWidth: { min: 100, max: 150 },
         itemSpacing: 10,
-        placeholders: "",
         aspectRatio: 1 / 1,
         breakpoints: [],
-        balancePlacehodlers: true,
+        balancePlaceholders: true,
       },
       ...userConfig
     };
     this.gridContainer = document.querySelector(this.config.target);
-    this.gridItems = this.gridContainer.querySelectorAll(":scope > *");
+    // Grid items with the 'data-bento' attribute
+    this.gridItems = Array.from(
+      this.gridContainer.querySelectorAll(":scope > *")
+    ).filter((item) => item.hasAttribute("data-bento"));
+
+    // Placeholders that do not have the 'data-bento' attribute
+    this.placeholders = Array.from(
+      this.gridContainer.querySelectorAll(":scope > *")
+    ).filter((item) => !item.hasAttribute("data-bento"))
+      .filter(placeholder => !placeholder.style.gridColumn);
+
     this.prevTotalColumns = null;
     this.prevColumnCount = null;
 
+    this.hideOriginalPlaceholders();
     this.setupGrid();
     this.updateGrid();
 
@@ -49,16 +59,28 @@ class Bento {
     return totalColumns;
   }
 
-  removePlaceholders() {
-    const placeholders = this.gridContainer.querySelectorAll(this.config.placeholders);
-    placeholders.forEach((placeholder) => placeholder.remove());
+  hideOriginalPlaceholders() {
+    this.placeholders.forEach((placeholder) => {
+      placeholder.style.display = "none";
+    });
+  }
+
+  removeClonedPlaceholders() {
+    // Placeholders that are visible
+    Array.from(
+      this.gridContainer.querySelectorAll(":scope > *")
+    ).filter((item) => !item.hasAttribute("data-bento"))
+      .filter(placeholder => !!placeholder.style.gridColumn)
+      .forEach((placeholder) => {
+        placeholder.remove();
+      });
   }
 
   updateGrid() {
     const totalColumns = this.setupGrid();
 
     if (this.prevTotalColumns !== totalColumns) {
-      this.removePlaceholders();
+      this.removeClonedPlaceholders();
     }
 
     const gridMatrix = [];
@@ -145,11 +167,6 @@ class Bento {
       maxRow = Math.max(maxRow, gridRowStart + gridRowSpan - 1);
     });
 
-    let placeholders = [];
-    if (this.config.placeholders) {
-      placeholders = Array.from(document.querySelectorAll(this.config.placeholders));
-    }
-
     const addPlaceholders = () => {
       let placeholderIndex = 0;
 
@@ -180,17 +197,18 @@ class Bento {
             }
 
             let placeholder;
-            if (placeholders.length > 0) {
+            if (this.placeholders.length > 0) {
               // Clone the placeholder
-              placeholder = placeholders[placeholderIndex].cloneNode(true);
+              placeholder = this.placeholders[placeholderIndex].cloneNode(true);
               // Update the placeholder index for the next iteration
-              placeholderIndex = (placeholderIndex + 1) % placeholders.length;
+              placeholderIndex = (placeholderIndex + 1) % this.placeholders.length;
+              placeholder.style.display = "block";
             } else {
               // Create a new div if no placeholders are available
               placeholder = document.createElement("div");
             }
 
-            placeholder.classList.add("grid-item-placeholder");
+            placeholder.classList.add("bentogrid-placeholder");
             placeholder.style.gridColumn = `${column + 1
               } / span ${gridColumnSpan}`;
             placeholder.style.gridRow = `${row + 1} / span ${gridRowSpan}`;
@@ -200,7 +218,7 @@ class Bento {
             occupyPosition(column, row, gridColumnSpan, gridRowSpan);
 
             // Swap the placeholder element with an existing element of the same size, if available
-            if (this.config.balancePlacehodlers) {
+            if (this.config.balancePlaceholders) {
               const sameSizeElement = Array.from(this.gridItems).find((item) => {
                 const gridColumnStart = parseInt(item.style.gridColumn.split(" / ")[0]);
                 const gridRowStart = parseInt(item.style.gridRow.split(" / ")[0]);
@@ -265,8 +283,7 @@ class Bento {
 }
 
 const myBento = new Bento({
-  target: ".grid-container",
-  placeholders: ".grid-item-placeholder", // selects elements that should be used as placeholders and should loop through them
+  target: "#bentogrid",
   cellWidth: {
     min: 100,
     max: 150
@@ -291,10 +308,10 @@ const myBento = new Bento({
     }
   ],
   aspectRatio: 1, // Users can set their own aspect ratio for a cell (not an item) (width / height)
-  balancePlacehodlers: true
+  balancePlaceholders: true
 });
 
-const gridContainer = document.querySelector('.grid-container');
+const gridContainer = document.querySelector('#bentogrid');
 
 gridContainer.addEventListener("calculationDone", (event) => {
   console.log("Calculation done for", event.detail.gridContainer);

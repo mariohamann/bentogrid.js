@@ -3,19 +3,10 @@ html {
 	width: 100%;
 }
 
-.grid-container {
-}
-
-.grid-item,
-.grid-item-placeholder {
-	box-sizing: border-box;
+#bentogrid > * {
 	border: 1px solid black;
 	padding: 10px;
 	font-size: 14px;
-}
-
-.grid-item-placeholder {
-	border-color: transparent; /* Hide the border for placeholder elements */
 }
 
 .placeholder-1 {
@@ -28,8 +19,4 @@ html {
 
 .placeholder-3 {
 	background-color: orange;
-}
-
-.placeholder-4 {
-	background-color: purple;
 }
