@@ -151,6 +151,8 @@ class Bento {
     }
 
     const addPlaceholders = () => {
+      let placeholderIndex = 0;
+
       for (let row = 0; row < maxRow; row++) {
         for (let column = 0; column < totalColumns; column++) {
           if (!gridMatrix[column][row]) {
@@ -177,8 +179,18 @@ class Bento {
               }
             }
 
-            const placeholder = document.createElement("div");
-            placeholder.className = "grid-item grid-item-placeholder";
+            let placeholder;
+            if (placeholders.length > 0) {
+              // Clone the placeholder
+              placeholder = placeholders[placeholderIndex].cloneNode(true);
+              // Update the placeholder index for the next iteration
+              placeholderIndex = (placeholderIndex + 1) % placeholders.length;
+            } else {
+              // Create a new div if no placeholders are available
+              placeholder = document.createElement("div");
+            }
+
+            placeholder.classList.add("grid-item-placeholder");
             placeholder.style.gridColumn = `${column + 1
               } / span ${gridColumnSpan}`;
             placeholder.style.gridRow = `${row + 1} / span ${gridRowSpan}`;

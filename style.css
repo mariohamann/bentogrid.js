@@ -4,9 +4,6 @@ html {
 }
 
 .grid-container {
-	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-	/* Remove grid-gap: 10px; */
 }
 
 .grid-item,
@@ -15,11 +12,9 @@ html {
 	border: 1px solid black;
 	padding: 10px;
 	font-size: 14px;
-	margin: 5px; /* Add margin to create spacing between items */
 }
 
 .grid-item-placeholder {
-	background-color: #ccc; /* Adjust the color as needed */
 	border-color: transparent; /* Hide the border for placeholder elements */
 }
 
