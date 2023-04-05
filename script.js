@@ -1,4 +1,4 @@
-class Bento {
+class BentoGrid {
   constructor(userConfig) {
     this.config = {
       ...{
@@ -318,7 +318,7 @@ class Bento {
   }
 }
 
-const myBento = new Bento({
+const myBento = new BentoGrid({
   cellWidth: {
     min: 100,
     max: 150
