@@ -1,40 +1,40 @@
 html {
-  height: 100%;
-  width: 100%;
+	height: 100%;
+	width: 100%;
 }
 
 .grid-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-  /* Remove grid-gap: 10px; */
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+	/* Remove grid-gap: 10px; */
 }
 
 .grid-item,
-.grid-item-dummy {
-  box-sizing: border-box;
-  border: 1px solid black;
-  padding: 10px;
-  font-size: 14px;
-  margin: 5px; /* Add margin to create spacing between items */
+.grid-item-placeholder {
+	box-sizing: border-box;
+	border: 1px solid black;
+	padding: 10px;
+	font-size: 14px;
+	margin: 5px; /* Add margin to create spacing between items */
 }
 
-.grid-item-dummy {
-  background-color: #ccc; /* Adjust the color as needed */
-  border-color: transparent; /* Hide the border for dummy elements */
+.grid-item-placeholder {
+	background-color: #ccc; /* Adjust the color as needed */
+	border-color: transparent; /* Hide the border for placeholder elements */
 }
 
-.dummy-1{
-  background-color: red;
+.placeholder-1 {
+	background-color: red;
 }
 
-.dummy-2{
-  background-color: green;
+.placeholder-2 {
+	background-color: green;
 }
 
-.dummy-3{
-  background-color: orange;
+.placeholder-3 {
+	background-color: orange;
 }
 
-.dummy-4{
-  background-color: purple;
+.placeholder-4 {
+	background-color: purple;
 }

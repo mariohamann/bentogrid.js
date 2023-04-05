@@ -150,7 +150,7 @@ class Bento {
       placeholders = Array.from(document.querySelectorAll(this.config.placeholders));
     }
 
-    const addDummyElements = () => {
+    const addPlaceholders = () => {
       for (let row = 0; row < maxRow; row++) {
         for (let column = 0; column < totalColumns; column++) {
           if (!gridMatrix[column][row]) {
@@ -177,17 +177,17 @@ class Bento {
               }
             }
 
-            const dummyElement = document.createElement("div");
-            dummyElement.className = "grid-item grid-item-dummy";
-            dummyElement.style.gridColumn = `${column + 1
+            const placeholder = document.createElement("div");
+            placeholder.className = "grid-item grid-item-placeholder";
+            placeholder.style.gridColumn = `${column + 1
               } / span ${gridColumnSpan}`;
-            dummyElement.style.gridRow = `${row + 1} / span ${gridRowSpan}`;
-            this.gridContainer.appendChild(dummyElement);
+            placeholder.style.gridRow = `${row + 1} / span ${gridRowSpan}`;
+            this.gridContainer.appendChild(placeholder);
 
             // Update gridMatrix
             occupyPosition(column, row, gridColumnSpan, gridRowSpan);
 
-            // Swap the dummy element with an existing element of the same size, if available
+            // Swap the placeholder element with an existing element of the same size, if available
             if (this.config.swapPlaceholders) {
               const sameSizeElement = Array.from(this.gridItems).find((item) => {
                 const gridColumnStart = parseInt(item.style.gridColumn.split(" / ")[0]);
@@ -205,10 +205,10 @@ class Bento {
               if (sameSizeElement) {
                 const originalGridColumn = sameSizeElement.style.gridColumn;
                 const originalGridRow = sameSizeElement.style.gridRow;
-                sameSizeElement.style.gridColumn = dummyElement.style.gridColumn;
-                sameSizeElement.style.gridRow = dummyElement.style.gridRow;
-                dummyElement.style.gridColumn = originalGridColumn;
-                dummyElement.style.gridRow = originalGridRow;
+                sameSizeElement.style.gridColumn = placeholder.style.gridColumn;
+                sameSizeElement.style.gridRow = placeholder.style.gridRow;
+                placeholder.style.gridColumn = originalGridColumn;
+                placeholder.style.gridRow = originalGridRow;
               }
             }
           }
@@ -216,7 +216,7 @@ class Bento {
       }
     }
 
-    addDummyElements();
+    addPlaceholders();
 
     this.prevTotalColumns = totalColumns;
   }
@@ -243,7 +243,7 @@ class Bento {
 
 const myBento = new Bento({
   target: ".grid-container",
-  placeholders: ".grid-item-dummy", // selects elements that should be used as placeholders and should loop through them
+  placeholders: ".grid-item-placeholder", // selects elements that should be used as placeholders and should loop through them
   cellWidth: {
     min: 100,
     max: 150
