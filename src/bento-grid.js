@@ -282,9 +282,10 @@ class BentoGrid {
                 swapPerformed = true;
               }
 
-              // Update gridMatrix
-              occupyPosition(column, row, gridColumnSpan, gridRowSpan);
             }
+            
+            // Update gridMatrix
+            occupyPosition(column, row, gridColumnSpan, gridRowSpan);
 
             this.gridContainer.appendChild(placeholder);
           }
