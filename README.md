@@ -21,7 +21,7 @@ Alternatively you can use a CDN:
 
 ```html
 <script type="module">
-	import BentoGrid from "https://cdn.jsdelivr.net/npm/bento-grid@1.2.0/src/bento-grid.min.js";
+	import BentoGrid from "https://cdn.jsdelivr.net/npm/bento-grid@1.3.0/src/bento-grid.min.js";
 	const myBento = new BentoGrid({
 		// Your configuration options here
 	});
