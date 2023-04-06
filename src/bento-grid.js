@@ -8,7 +8,7 @@ class BentoGrid {
         itemSpacing: 10,
         aspectRatio: 1 / 1,
         breakpoints: [],
-        balancePlaceholders: true,
+        balancePlaceholders: false,
       },
       ...userConfig
     };  // Check if config.target is a string or an HTMLElement
@@ -170,7 +170,6 @@ class BentoGrid {
       );
       maxRow = Math.max(maxRow, gridRowStart + gridRowSpan - 1);
     });
-
     const addPlaceholders = () => {
       let placeholderIndex = 0;
       let lastPlaceholderPositions = [];
@@ -190,15 +189,18 @@ class BentoGrid {
             }
 
             // Find the maximum gridRowSpan
-            let rowSpanValid = true;
-            for (let c = column; c < column + gridColumnSpan; c++) {
-              for (let r = row + 1; r < maxRow && rowSpanValid; r++) {
+            for (let r = row + 1; r < maxRow; r++) {
+              let rowSpanValid = true;
+              for (let c = column; c < column + gridColumnSpan; c++) {
                 if (gridMatrix[c][r]) {
                   rowSpanValid = false;
-                } else {
-                  gridRowSpan++;
+                  break;
                 }
               }
+              if (!rowSpanValid) {
+                break;
+              }
+              gridRowSpan++;
             }
 
             let placeholder;
@@ -214,13 +216,10 @@ class BentoGrid {
             }
 
             placeholder.classList.add("bento-grid-placeholder");
-            placeholder.style.gridColumn = `${column + 1
-              } / span ${gridColumnSpan}`;
+            placeholder.style.gridColumn = `${column + 1} / span ${gridColumnSpan}`;
             placeholder.style.gridRow = `${row + 1} / span ${gridRowSpan}`;
-            this.gridContainer.appendChild(placeholder);
 
-            // Update gridMatrix
-            occupyPosition(column, row, gridColumnSpan, gridRowSpan);
+            let swapPerformed = false;
 
             // Swap the placeholder element with an existing element of the same size, if available
             if (this.config.balancePlaceholders) {
@@ -275,7 +274,13 @@ class BentoGrid {
                   column: parseInt(placeholder.style.gridColumn.split(" / ")[0]) - 1,
                   row: parseInt(placeholder.style.gridRow.split(" / ")[0]) - 1,
                 });
+                swapPerformed = true;
               }
+
+              this.gridContainer.appendChild(placeholder);
+
+              // Update gridMatrix
+              occupyPosition(column, row, gridColumnSpan, gridRowSpan);
             }
           }
         }
@@ -317,3 +322,5 @@ class BentoGrid {
     this.gridContainer.dispatchEvent(calculationDoneEvent);
   }
 }
+
+export default BentoGrid;
