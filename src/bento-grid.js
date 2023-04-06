@@ -3,20 +3,22 @@ class BentoGrid {
     this.config = {
       ...{
         target: ".bento-grid",
-        columns: null,
+        columns: undefined,
         cellWidth: { min: 100, max: 150 },
-        itemSpacing: 10,
+        cellGap: 10,
         aspectRatio: 1 / 1,
         breakpoints: [],
         balancePlaceholders: false,
       },
       ...userConfig
-    };  // Check if config.target is a string or an HTMLElement
+    };
+    
+    // Check if config.target is a string or an HTMLElement
     this.gridContainer =
       typeof this.config.target === "string"
         ? document.querySelector(this.config.target)
         : this.config.target;
-    this.gridContainer = document.querySelector(this.config.target);
+
     // Grid items with the 'data-bento' attribute
     this.gridItems = Array.from(
       this.gridContainer.querySelectorAll(":scope > *")
@@ -39,7 +41,7 @@ class BentoGrid {
   }
 
   getBreakpoint() {
-    const width = window.innerWidth;
+    const width = this.gridContainer.innerWidth;
     let activeBreakpoint = { ...this.config };
     for (const breakpoint of this.config.breakpoints) {
       if (width >= breakpoint.minWidth) {
@@ -54,12 +56,12 @@ class BentoGrid {
     const totalColumns =
       breakpoint.columns ||
       Math.floor(
-        (this.gridContainer.clientWidth + breakpoint.itemSpacing) /
-        (breakpoint.cellWidth.min + breakpoint.itemSpacing)
+        (this.gridContainer.clientWidth + breakpoint.cellGap) /
+        (breakpoint.cellWidth.min + breakpoint.cellGap)
       );
     this.gridContainer.style.display = "grid";
     this.gridContainer.style.gridTemplateColumns = `repeat(${totalColumns}, minmax(${breakpoint.cellWidth.min}px, 1fr))`;
-    this.gridContainer.style.gridGap = `${breakpoint.itemSpacing}px`;
+    this.gridContainer.style.gridGap = `${breakpoint.cellGap}px`;
     return totalColumns;
   }
 
