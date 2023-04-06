@@ -12,26 +12,16 @@ class BentoGrid {
       },
       ...userConfig
     };
-    
+
     // Check if config.target is a string or an HTMLElement
     this.gridContainer =
       typeof this.config.target === "string"
         ? document.querySelector(this.config.target)
         : this.config.target;
 
-    // Grid items with the 'data-bento' attribute
-    this.gridItems = Array.from(
-      this.gridContainer.querySelectorAll(":scope > *")
-    ).filter(item => item.hasAttribute("data-bento"))
-    // items that are visible
-      .filter(item => item.offsetParent !== null)
-    ;
-
-    // Placeholders that do not have the 'data-bento' attribute
-    this.placeholders = Array.from(
-      this.gridContainer.querySelectorAll(":scope > *")
-    ).filter((item) => !item.hasAttribute("data-bento"))
-      .filter(placeholder => !placeholder.style.gridColumn);
+    this.gridItems = undefined;
+    this.placeholders = undefined;
+    this.setElements();
 
     this.prevTotalColumns = null;
     this.prevColumnCount = null;
@@ -41,6 +31,21 @@ class BentoGrid {
     this.updateGrid();
 
     this.handleResponsiveBehavior();
+  }
+
+  setElements() {
+    // Grid items with the 'data-bento' attribute
+    this.gridItems = Array
+      .from( this.gridContainer.querySelectorAll(":scope > *") )
+      .filter(item => item.hasAttribute("data-bento"))
+      // items that are visible
+      .filter(item => item.offsetParent !== null);
+
+    // Placeholders that do not have the 'data-bento' attribute and are not set by the script
+    this.placeholders = Array
+      .from( this.gridContainer.querySelectorAll(":scope > *") )
+      .filter((item) => !item.hasAttribute("data-bento"))
+      .filter(placeholder => !placeholder.style.gridColumn);
   }
 
   getBreakpoint() {
@@ -316,6 +321,8 @@ class BentoGrid {
   }
 
   recalculate() {
+    // Check if elements were added/removed or are now visible/invisible.
+    this.setElements();
     this.updateGrid();
   }
 
