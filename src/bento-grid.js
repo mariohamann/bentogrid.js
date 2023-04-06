@@ -22,7 +22,10 @@ class BentoGrid {
     // Grid items with the 'data-bento' attribute
     this.gridItems = Array.from(
       this.gridContainer.querySelectorAll(":scope > *")
-    ).filter((item) => item.hasAttribute("data-bento"));
+    ).filter(item => item.hasAttribute("data-bento"))
+    // items that are visible
+      .filter(item => item.offsetParent !== null)
+    ;
 
     // Placeholders that do not have the 'data-bento' attribute
     this.placeholders = Array.from(
