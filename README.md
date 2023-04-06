@@ -1,6 +1,13 @@
 # bento-grid.js
 
-BentoGrid is a lightweight, responsive, and flexible grid library inspired by Apple's marketing slides and [bento.me](https://www.bento.me/). It allows you to create beautiful and responsive grid layouts with ease. BentoGrid has zero dependencies and weighs about 2KB (minified).
+Create beautiful and responsive grid layouts with BentoGrid, a smart library that automatically positions elements for you. No more hassle with manual positioning!
+
+- 🔧 Flexible: Easily set the size of elements via attributes (`data-bento="1x3"`)
+- 🧠 Smart: Automatic positioning of elements in a grid
+- 🌐 Lightweight: Only 2KB (minified) with zero dependencies
+- 📱 Responsive: Adaptive grid layouts for various screen sizes
+- 🎨 Inspired by Apple's marketing slides and bento.me
+
 
 Minimal example: https://mariohamann.github.io/bento-grid.js/
 
