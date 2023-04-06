@@ -1,6 +1,6 @@
 {
   "name": "bento-grid",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "description": "A responsive, flexible bento grid library.",
   "main": "src/bento-grid.js",
   "scripts": {

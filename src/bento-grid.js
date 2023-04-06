@@ -5,10 +5,11 @@ class BentoGrid {
         target: ".bento-grid",
         columns: undefined,
         cellWidth: { min: 100, max: 150 },
-        cellGap: 10,
+        cellGap: 0,
         aspectRatio: 1 / 1,
         breakpoints: [],
         balancePlaceholders: false,
+        breakpointReference: 'target'
       },
       ...userConfig
     };
@@ -49,7 +50,10 @@ class BentoGrid {
   }
 
   getBreakpoint() {
-    const width = this.gridContainer.innerWidth;
+    console.log(this.gridContainer.width)
+    const width = this.config.breakpointReference === 'target'
+      ? this.gridContainer.clientWidth
+      : window.innerWidth;
     let activeBreakpoint = { ...this.config };
     for (const breakpoint of this.config.breakpoints) {
       if (width >= breakpoint.minWidth) {
@@ -306,7 +310,7 @@ class BentoGrid {
   }
 
   handleResponsiveBehavior() {
-    this.resizeObserver = new ResizeObserver(() => {
+    const onResize = () => {
       clearTimeout(this.resizeObserver._timeoutId);
       this.resizeObserver._timeoutId = setTimeout(() => {
         const currentColumnCount = this.setupGrid();
@@ -315,7 +319,20 @@ class BentoGrid {
         }
         this.prevColumnCount = currentColumnCount;
       }, 10);
-    });
+    };
+
+    if (this.config.breakpointReference === 'window') {
+      this.resizeObserver = {
+        observe: () => {
+          window.addEventListener('resize', onResize);
+        },
+        unobserve: () => {
+          window.removeEventListener('resize', onResize);
+        },
+      };
+    } else {
+      this.resizeObserver = new ResizeObserver(onResize);
+    }
 
     this.resizeObserver.observe(this.gridContainer);
   }
