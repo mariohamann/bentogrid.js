@@ -2,13 +2,13 @@ class BentoGrid {
   constructor(userConfig) {
     this.config = {
       ...{
-        target: ".bento-grid",
+        target: ".bentogrid",
         columns: undefined,
-        cellWidth: { min: 100, max: 150 },
+        minCellWidth: 100,
         cellGap: 0,
         aspectRatio: 1 / 1,
         breakpoints: [],
-        balancePlaceholders: false,
+        balanceFillers: false,
         breakpointReference: 'target'
       },
       ...userConfig
@@ -21,13 +21,13 @@ class BentoGrid {
         : this.config.target;
 
     this.gridItems = undefined;
-    this.placeholders = undefined;
+    this.fillers = undefined;
     this.setElements();
 
     this.prevTotalColumns = null;
     this.prevColumnCount = null;
 
-    this.hideOriginalPlaceholders();
+    this.hideOriginalFillers();
     this.setupGrid();
     this.updateGrid();
 
@@ -37,29 +37,50 @@ class BentoGrid {
   setElements() {
     // Grid items with the 'data-bento' attribute
     this.gridItems = Array
-      .from( this.gridContainer.querySelectorAll(":scope > *") )
+      .from(this.gridContainer.querySelectorAll(":scope > *"))
       .filter(item => item.hasAttribute("data-bento"))
       // items that are visible
       .filter(item => item.offsetParent !== null);
 
-    // Placeholders that do not have the 'data-bento' attribute and are not set by the script
-    this.placeholders = Array
-      .from( this.gridContainer.querySelectorAll(":scope > *") )
+    // Fillers that do not have the 'data-bento' attribute and are not set by the script
+    this.fillers = Array
+      .from(this.gridContainer.querySelectorAll(":scope > *"))
       .filter((item) => !item.hasAttribute("data-bento"))
-      .filter(placeholder => !placeholder.style.gridColumn);
+      .filter(filler => !filler.style.gridColumn);
   }
 
   getBreakpoint() {
-    console.log(this.gridContainer.width)
-    const width = this.config.breakpointReference === 'target'
+    const width = this.config.breakpointReference === "target"
       ? this.gridContainer.clientWidth
       : window.innerWidth;
+
     let activeBreakpoint = { ...this.config };
-    for (const breakpoint of this.config.breakpoints) {
-      if (width >= breakpoint.minWidth) {
-        activeBreakpoint = { ...activeBreakpoint, ...breakpoint };
+
+    const breakpointKeys = Object.keys(this.config.breakpoints).map(Number).sort((a, b) => a - b);
+
+    for (const breakpointKey of breakpointKeys) {
+      if (width >= breakpointKey) {
+        activeBreakpoint = { ...activeBreakpoint, ...this.config.breakpoints[breakpointKey] };
       }
     }
+
+    // Look up for the last defined columns or minCellWidth values from fitting breakpoints
+    for (let i = breakpointKeys.length - 1; i >= 0; i--) {
+      const breakpointKey = breakpointKeys[i];
+      const breakpoint = this.config.breakpoints[breakpointKey];
+      if (width >= breakpointKey) {
+        if (breakpoint.columns) {
+          activeBreakpoint.columns = breakpoint.columns;
+          activeBreakpoint.minCellWidth = undefined;
+          break;
+        } else if (breakpoint.minCellWidth) {
+          activeBreakpoint.minCellWidth = breakpoint.minCellWidth;
+          activeBreakpoint.columns = undefined;
+          break;
+        }
+      }
+    }
+
     return activeBreakpoint;
   }
 
@@ -69,28 +90,28 @@ class BentoGrid {
       breakpoint.columns ||
       Math.floor(
         (this.gridContainer.clientWidth + breakpoint.cellGap) /
-        (breakpoint.cellWidth.min + breakpoint.cellGap)
+        (breakpoint.minCellWidth + breakpoint.cellGap)
       );
     this.gridContainer.style.display = "grid";
-    this.gridContainer.style.gridTemplateColumns = `repeat(${totalColumns}, minmax(${breakpoint.cellWidth.min}px, 1fr))`;
+    this.gridContainer.style.gridTemplateColumns = `repeat(${totalColumns}, minmax(${breakpoint.minCellWidth}px, 1fr))`;
     this.gridContainer.style.gridGap = `${breakpoint.cellGap}px`;
     return totalColumns;
   }
 
-  hideOriginalPlaceholders() {
-    this.placeholders.forEach((placeholder) => {
-      placeholder.style.display = "none";
+  hideOriginalFillers() {
+    this.fillers.forEach((filler) => {
+      filler.style.display = "none";
     });
   }
 
-  removeClonedPlaceholders() {
-    // Placeholders that are visible
+  removeClonedFillers() {
+    // Fillers that are visible
     Array.from(
       this.gridContainer.querySelectorAll(":scope > *")
     ).filter((item) => !item.hasAttribute("data-bento"))
-      .filter(placeholder => !!placeholder.style.gridColumn)
-      .forEach((placeholder) => {
-        placeholder.remove();
+      .filter(filler => !!filler.style.gridColumn)
+      .forEach((filler) => {
+        filler.remove();
       });
   }
 
@@ -98,7 +119,7 @@ class BentoGrid {
     const totalColumns = this.setupGrid();
 
     if (this.prevTotalColumns !== totalColumns) {
-      this.removeClonedPlaceholders();
+      this.removeClonedFillers();
     }
 
     const gridMatrix = [];
@@ -174,7 +195,7 @@ class BentoGrid {
 
     const breakpoint = this.getBreakpoint();
 
-    this.gridContainer.style.gridTemplateRows = `repeat(${maxRow}, minmax(${breakpoint.cellWidth.min}px, 1fr))`;
+    this.gridContainer.style.gridTemplateRows = `repeat(${maxRow}, minmax(${breakpoint.minCellWidth}px, 1fr))`;
 
     // Find the maximum row
     this.gridItems.forEach((item) => {
@@ -184,9 +205,9 @@ class BentoGrid {
       );
       maxRow = Math.max(maxRow, gridRowStart + gridRowSpan - 1);
     });
-    const addPlaceholders = () => {
-      let placeholderIndex = 0;
-      let lastPlaceholderPositions = [];
+    const addFillers = () => {
+      let fillerIndex = 0;
+      let lastFillerPositions = [];
 
       for (let row = 0; row < maxRow; row++) {
         for (let column = 0; column < totalColumns; column++) {
@@ -217,38 +238,40 @@ class BentoGrid {
               gridRowSpan++;
             }
 
-            let placeholder;
-            if (this.placeholders.length > 0) {
-              // Clone the placeholder
-              placeholder = this.placeholders[placeholderIndex].cloneNode(true);
-              // Update the placeholder index for the next iteration
-              placeholderIndex = (placeholderIndex + 1) % this.placeholders.length;
-              placeholder.style.display = "block";
+            let filler;
+            if (this.fillers.length > 0) {
+              // Clone the filler
+              filler = this.fillers[fillerIndex].cloneNode(true);
+              // Update the filler index for the next iteration
+              fillerIndex = (fillerIndex + 1) % this.fillers.length;
+              filler.style.display = "block";
             } else {
-              // Create a new div if no placeholders are available
-              placeholder = document.createElement("div");
+              // Create a new div if no fillers are available
+              filler = document.createElement("div");
             }
 
-            placeholder.classList.add("bento-grid-placeholder");
-            placeholder.style.gridColumn = `${column + 1} / span ${gridColumnSpan}`;
-            placeholder.style.gridRow = `${row + 1} / span ${gridRowSpan}`;
+            filler.classList.add("bento-filler");
+            filler.style.gridColumn = `${column + 1} / span ${gridColumnSpan}`;
+            filler.style.gridRow = `${row + 1} / span ${gridRowSpan}`;
 
             let swapPerformed = false;
 
-            // Swap the placeholder element with an existing element of the same size, if available
-            if (this.config.balancePlaceholders) {
-              const availableSwaps = Array.from(this.gridItems).filter((item) => {
-                const gridColumnStart = parseInt(item.style.gridColumn.split(" / ")[0]);
-                const gridRowStart = parseInt(item.style.gridRow.split(" / ")[0]);
-                const gridColumnEnd = parseInt(item.style.gridColumn.split(" / ")[1].split(" ")[1]);
-                const gridRowEnd = parseInt(item.style.gridRow.split(" / ")[1].split(" ")[1]);
+            // Swap the filler element with an existing element of the same size, if available
+            if (this.config.balanceFillers) {
+              const availableSwaps = Array.from(this.gridItems)
+                .filter(item => !item.hasAttribute("data-bento-no-swap"))
+                .filter((item) => {
+                  const gridColumnStart = parseInt(item.style.gridColumn.split(" / ")[0]);
+                  const gridRowStart = parseInt(item.style.gridRow.split(" / ")[0]);
+                  const gridColumnEnd = parseInt(item.style.gridColumn.split(" / ")[1].split(" ")[1]);
+                  const gridRowEnd = parseInt(item.style.gridRow.split(" / ")[1].split(" ")[1]);
 
-                return (
-                  gridColumnEnd === gridColumnSpan &&
-                  gridRowEnd === gridRowSpan &&
-                  (gridColumnStart !== column + 1 || gridRowStart !== row + 1)
-                );
-              });
+                  return (
+                    gridColumnEnd === gridColumnSpan &&
+                    gridRowEnd === gridRowSpan &&
+                    (gridColumnStart !== column + 1 || gridRowStart !== row + 1)
+                  );
+                });
 
               if (availableSwaps.length > 0) {
                 const getNextPositionDistance = (current, next) => {
@@ -264,12 +287,12 @@ class BentoGrid {
                 };
 
                 const bestSwap = availableSwaps.reduce((best, current) => {
-                  const currentAvgDistance = getAverageSwapsDistance(lastPlaceholderPositions, {
+                  const currentAvgDistance = getAverageSwapsDistance(lastFillerPositions, {
                     column: parseInt(current.style.gridColumn.split(" / ")[0]) - 1,
                     row: parseInt(current.style.gridRow.split(" / ")[0]) - 1,
                   });
 
-                  const bestAvgDistance = getAverageSwapsDistance(lastPlaceholderPositions, {
+                  const bestAvgDistance = getAverageSwapsDistance(lastFillerPositions, {
                     column: parseInt(best.style.gridColumn.split(" / ")[0]) - 1,
                     row: parseInt(best.style.gridRow.split(" / ")[0]) - 1,
                   });
@@ -279,30 +302,30 @@ class BentoGrid {
 
                 const originalGridColumn = bestSwap.style.gridColumn;
                 const originalGridRow = bestSwap.style.gridRow;
-                bestSwap.style.gridColumn = placeholder.style.gridColumn;
-                bestSwap.style.gridRow = placeholder.style.gridRow;
-                placeholder.style.gridColumn = originalGridColumn;
-                placeholder.style.gridRow = originalGridRow;
+                bestSwap.style.gridColumn = filler.style.gridColumn;
+                bestSwap.style.gridRow = filler.style.gridRow;
+                filler.style.gridColumn = originalGridColumn;
+                filler.style.gridRow = originalGridRow;
 
-                lastPlaceholderPositions.push({
-                  column: parseInt(placeholder.style.gridColumn.split(" / ")[0]) - 1,
-                  row: parseInt(placeholder.style.gridRow.split(" / ")[0]) - 1,
+                lastFillerPositions.push({
+                  column: parseInt(filler.style.gridColumn.split(" / ")[0]) - 1,
+                  row: parseInt(filler.style.gridRow.split(" / ")[0]) - 1,
                 });
                 swapPerformed = true;
               }
 
             }
-            
+
             // Update gridMatrix
             occupyPosition(column, row, gridColumnSpan, gridRowSpan);
 
-            this.gridContainer.appendChild(placeholder);
+            this.gridContainer.appendChild(filler);
           }
         }
       }
     }
 
-    addPlaceholders();
+    addFillers();
 
     this.prevTotalColumns = totalColumns;
 

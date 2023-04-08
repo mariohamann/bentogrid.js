@@ -1,0 +1,63 @@
+---
+export interface Props {
+	title?: string;
+	subtitle?: string;
+	dataBento?: string;
+	dataBentoNoSwap?: boolean;
+	color?: "light" | "shade" | "dark";
+}
+
+const {
+	title,
+	subtitle,
+	dataBento,
+	dataBentoNoSwap = false,
+	color = "light",
+} = Astro.props;
+---
+
+<div
+	class:list={[
+		"justify-between overflow-hidden relative rounded-2xl p-6 border border-sand-600",
+		{
+			"bg-transparent": color === "light",
+			"bg-water-200": color === "shade",
+			"bg-black": color === "dark",
+		},
+		{
+			"text-sand-100": color === "dark",
+			"text-black": color !== "dark",
+		},
+	]}
+	data-bento={dataBento}
+	data-bento-no-swap={dataBentoNoSwap}
+>
+	<slot />
+	<div class='relative space-y-4'>
+		{
+			title && title === "BentoGrid.js" ? (
+				<h1 class='flex-none text-4xl !mb-5 font-bold'>{title}</h1>
+			) : (
+				<dt class='flex-none text-2xl font-bold'>{title}</dt>
+			)
+		}
+		{
+			subtitle && (
+				<dd class='text-base'>
+					<span
+						class:list={[
+							"px-2 -mx-2 py-px -my-px rounded-md",
+							{
+								"bg-sand-100/95": color === "light",
+								"bg-water-200/95": color === "shade",
+								"bg-black/95": color === "dark",
+							},
+						]}
+					>
+						{subtitle}
+					</span>
+				</dd>
+			)
+		}
+	</div>
+</div>

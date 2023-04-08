@@ -1,0 +1,125 @@
+---
+import BentoItem from "../components/BentoItem.astro";
+---
+
+<html lang='en'>
+	<head>
+		<meta charset='utf-8' />
+		<meta name='viewport' content='width=device-width' />
+		<meta name='generator' content={Astro.generator} />
+		<title>BentoGrid.js</title>
+
+		<style is:global>
+			/* m-plus-2-300 - latin */
+			@font-face {
+				font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+				font-family: "M PLUS 2";
+				font-style: normal;
+				font-weight: 400;
+				src: url("/fonts/m-plus-2-v6-latin-300.woff2") format("woff2"),
+					/* Chrome 36+, Opera 23+, Firefox 39+ */
+						url("/fonts/m-plus-2-v6-latin-300.woff") format("woff"); /* Chrome 5+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+			}
+			/* m-plus-2-500 - latin */
+			@font-face {
+				font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+				font-family: "M PLUS 2";
+				font-style: normal;
+				font-weight: 600;
+				src: url("/fonts/m-plus-2-v6-latin-500.woff2") format("woff2"),
+					/* Chrome 36+, Opera 23+, Firefox 39+ */
+						url("/fonts/m-plus-2-v6-latin-500.woff") format("woff"); /* Chrome 5+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+			}
+		</style>
+	</head>
+	<body class='p-4 font-sans sm:p-6 lg:p-8 bg-sand-100'>
+		<script>
+			import BentoGrid from "@bentogrid/core";
+
+			new BentoGrid({
+				cellGap: 16,
+				target: "#herogrid",
+				balanceFillers: true,
+				columns: 2,
+				breakpoints: {
+					400: {
+						minCellWidth: 188,
+						cellGap: 24,
+					},
+				},
+				breakpointReference: "target",
+				aspectRatio: 1 / 1,
+			});
+		</script>
+
+		<div id='herogrid' class='max-w-[1100px] mx-auto'>
+			<BentoItem
+				color='shade'
+				dataBento='2x2'
+				dataBentoNoSwap
+				title='BentoGrid.js'
+				subtitle='Create beautiful and responsive grid layouts with BentoGrid.js, a smart library that automatically positions elements depending on their side in a grid for you.'
+			>
+				<img
+					class='absolute right-6 bottom-0 h-[42%]'
+					src='./images/element-plant.webp'
+				/>
+			</BentoItem>
+			<BentoItem
+				dataBento='2x1'
+				title='Flexible'
+				subtitle='Easily set the size of elements via attributes'
+			>
+				<img
+					class='absolute right-1 bottom-0 h-3/4'
+					src='./images/element-circle.webp'
+				/>
+			</BentoItem>
+			<BentoItem
+				dataBento='1x2'
+				title='Smart'
+				subtitle='Automatic positioning of elements in the grid'
+			>
+				<img
+					class='absolute right-0 bottom-0 w-3/5'
+					src='./images/element-smart.webp'
+				/>
+			</BentoItem>
+			<BentoItem
+				color='shade'
+				dataBento='1x2'
+				title='Light­weight'
+				subtitle='Only 2KB (minified) with zero dependencies'
+			>
+				<img
+					class='absolute right-0 bottom-6 w-[55%]'
+					src='./images/element-feather.webp'
+				/>
+			</BentoItem>
+			<BentoItem
+				dataBento='2x1'
+				title='Responsive'
+				subtitle='Adaptive grid layouts for various screen sizes'
+			>
+				<img
+					class='absolute right-0 bottom-0 h-full'
+					src='./images/element-stairs.webp'
+				/>
+			</BentoItem>
+			<BentoItem color={"dark"} dataBento='1x1'>
+				<div class='flex h-full items-end'>
+					<p class='text-right'>
+						Inspired by Apple's marketing slides and bento.me
+					</p>
+				</div>
+			</BentoItem>
+			<BentoItem>
+				<div
+					class='absolute right-0 bottom-0 w-full h-full bg-repeat bg-contain opacity-50 saturate-[80%] bg-center'
+					style="background-image: url('./images/element-grid-tile.webp')"
+				>
+				</div>
+			</BentoItem>
+		</div>
+	</body>
+</html>

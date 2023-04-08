@@ -1,3 +1,1 @@
-src/index.html
-src/style.css
-.github
+!dist/**/*
