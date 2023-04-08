@@ -62,7 +62,7 @@ import BentoItem from "../components/BentoItem.astro";
 				dataBento='2x2'
 				dataBentoNoSwap
 				title='BentoGrid.js'
-				subtitle='Create beautiful and responsive grid layouts with BentoGrid.js, a smart library that automatically positions elements depending on their side in a grid for you.'
+				subtitle='Create beautiful and responsive grid layouts with BentoGrid.js, a smart library that automatically positions elements depending on their size in a grid for you.'
 			>
 				<img
 					class='absolute right-6 bottom-0 h-[42%]'
@@ -113,7 +113,14 @@ import BentoItem from "../components/BentoItem.astro";
 			<BentoItem color={"dark"} dataBento='1x1'>
 				<div class='flex h-full items-end'>
 					<p class='text-right'>
-						Inspired by Apple's marketing slides and bento.me
+						Inspired by <a
+							class='underline-offset-[3px] decoration-sand-100/50 hover:decoration-sand-100 underline'
+							href='https://apple-summary-slides.vercel.app/event-AppleEventSeptember2022'
+							>Apple's summary slides</a
+						> and <a
+							class='underline-offset-[3px] decoration-sand-100/50 hover:decoration-sand-100 underline'
+							href='https://bento.me'>bento.me</a
+						>
 					</p>
 				</div>
 			</BentoItem>
