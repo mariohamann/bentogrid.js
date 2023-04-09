@@ -1,10 +1,10 @@
 {
   "name": "@bentogrid/core",
   "version": "1.0.0",
-  "description": "A responsive, flexible bento grid library.",
+  "description": "A smart library that automatically positions elements depending on their size in a grid to create responsive and beautiful layouts.",
   "main": "./BentoGrid.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "generate-types": "npx -p typescript tsc BentoGrid.js --declaration --allowJs --emitDeclarationOnly --outDir ."
   },
   "type": "module",
   "repository": {
@@ -16,5 +16,5 @@
   "bugs": {
     "url": "https://github.com/mariohamann/bentogrid.js/issues"
   },
-  "homepage": "https://github.com/mariohamann/bentogrid.js#readme"
+  "homepage": "https://mariohamann.github.io/bentogrid.js/"
 }

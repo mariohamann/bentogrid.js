@@ -1,134 +1,80 @@
 # BentoGrid.js
 
-Create beautiful and responsive grid layouts with BentoGrid.js, a smart library that automatically positions elements depending on their size in a grid for you.
+[![View documentation](https://img.shields.io/badge/%F0%9F%93%84-Documentation-%23333)](https://mariohamann.github.io/bentogrid.js/) [![View on npm](https://img.shields.io/npm/v/@bentogrid/core)](https://www.npmjs.com/package/@bentogrid/core)
 
--   🔧 Flexible: Easily set the size of elements via attributes (`data-bento="1x3"`)
--   🧠 Smart: Automatic positioning of elements in the grid
--   🌐 Lightweight: Only 2KB (minified) with zero dependencies
--   📱 Responsive: Adaptive grid layouts for various screen sizes
--   🎨 Inspired by [Apple's marketing slides](https://apple-summary-slides.vercel.app/event-AppleEventSeptember2022) and [bento.me](https://bento.me)
+A smart library that automatically positions elements depending on their size in a grid to create responsive and beautiful layouts.
 
-Example: https://mariohamann.github.io/bentogrid.js/
+* 🔧 Flexible: Easily set the size of elements via attributes
+* 🧠 Smart: Automatic positioning of elements in the grid
+* 🌐 Lightweight: Only 2KB (minified) with zero dependencies
+* 📱 Responsive: Adaptive grid layouts for various screen sizes
+* 🎨 Inspired by [Apple's marketing slides](https://apple-summary-slides.vercel.app/event-AppleEventSeptember2022) and [bento.me](https://bento.me)
 
-## Installation
+> **Note** The following documentation is automatically generated from the source code and just includes the API. For installation, usage and examples check out these [hand-crafted docs](https://mariohamann.github.io/bentogrid.js/).
 
-Add bentogrid.js directly in HTML:
+## Classes
 
-```html
-<script type="module">
-	import BentoGrid from "https://cdn.jsdelivr.net/npm/@bentogrid/core@1.0.0/BentoGrid.min.js";
-</script>
-```
+[BentoGrid](#BentoGrid)
 
-Or install via npm:
+## Typedefs
 
-```bash
-pnpm install @bentogrid/core
-```
+[UserConfig](#UserConfig) : `Object`
 
-```js
-import BentoGrid from "@bentogrid/core";
-const myBento = new BentoGrid({
-	// Your configuration options here
-});
-```
+[Breakpoint](#Breakpoint) : `Object`
 
-## Bento elements and fillers
+## BentoGrid
 
-BentoGrid.js recognizes elements as either Bento element or Bento filler. Bento elements are grid items with the data-bento attribute, while Bento fillers are grid items without the `data-bento` attribute.
+**Kind**: global class
 
--   To define a Bento element, add the `data-bento` attribute to an element with a value in the format of `Columns x Rows`. For example, an element that spans 2 columns and 3 rows should have the attribute `data-bento="2x3"`.
-    -   Hidden elements are automatically ignored.
-    -   When setting `balanceFillers` to `true`, you can ignore selected elements from being swapped by setting the attribute `data-bento-no-swap`. This makes espacially sense, if you don't want to swap e. g. the first element.
--   Fillers are used to fill empty spaces in the grid.
-    -   BentoGrid.js will automatically add fillers to the grid when necessary, cloning existing fillers in a loop if available, or creating new `div` elements if no fillers are present.
-    -   Bento fillers automatically get the class `bento-filler`. BentoGrid.js tries to make them as big as possible.
+* [BentoGrid](#BentoGrid)  
+   * [new BentoGrid(userConfig)](#new%5FBentoGrid%5Fnew)  
+   * [.recalculate()](#BentoGrid+recalculate)  
+   * [.emitCalculationDoneEvent()](#BentoGrid+emitCalculationDoneEvent)
 
-Your HTML could look like this:
+### new BentoGrid(userConfig)
 
-```html
-<style>
-	*[data-bento] {
-		background-color: #ccc;
-	}
-	.bento-filler {
-		background-color: red;
-	}
-</style>
+Create a new BentoGrid instance.
 
-<div class="bentogrid">
-	<!-- Bento elements / The first element won't be swapped -->
-	<div data-bento="1x1" data-bento-no-swap></div>
-	<div data-bento="2x2"></div>
-	<div data-bento="2x1"></div>
-	<!-- Fillers // They will get the class "bento-filler" when added -->
-	<div></div>
-	<div></div>
-</div>
-```
+| Param      | Type                          | Description                      |
+| ---------- | ----------------------------- | -------------------------------- |
+| userConfig | [`UserConfig`](#UserConfig) | User configuration for the grid. |
 
-## Configuration options
+### bentoGrid.recalculate()
 
-You can customize the behavior of your BentoGrid using the following configuration options:
+Recalculate the grid layout. Useful for cases when elements are added, removed, or visibility changes.
 
--   `target` (`String` or `HTMLElement`): The target element can either be a CSS selector string or a DOM element. BentoGrid.js will look for items with the `data-bento` attribute inside the target container and treat them as bento grid items. Other items will be treated as fillers. Default: `'.bentogrid'`
--   `cellWidth` (`Object`): The minimum and maximum width of a cell in the grid. Default: `100`.
--   `columns` (`Number`): The number of columns in the grid. This overrides `cellWidth`, if both are defined. Default: `undefined`.
--   `cellGap` (`Number`): The spacing between items in the grid. Default: `0`.
--   `breakpoints` (`Object`): An object with breakpoint objects, which can be used to customize the grid's behavior at different screen widths. Each breakpoint object has the `minWidth` as key and can have `cellWidth`, `columns` and `cellGap` as properties. Default: `{}`
--   `breakpointReference` (`'target' | 'window'`): Select if the breakpoints should reference to the target's or the window's width. Default: `'target'`
--   `aspectRatio` (`Number`): The aspect ratio for a cell in the grid (width / height). Currently this is only a very rough estimation and changes, when column width grows. In future there might be an additional strict mode. Default: `1 / 1`.
--   `balanceFillers` (`Boolean`): If true, the script will attempt to evenly distribute fillers throughout the grid. This should only be used, if you have styled the fillers. This might change the order of the items a lot and therefore should be used with caution, if order is important. You can ignore elements from being swapped by setting the attribute `data-bento-no-swap`. Default: `false`.
+**Kind**: instance method of [`BentoGrid`](#BentoGrid)  
 
-Your configuration options can be passed to the BentoGrid constructor and could look like this:
+### bentoGrid.emitCalculationDoneEvent()
 
-```js
-const myBento = new BentoGrid({
-	target: ".bentogrid",
-	columns: 2,
-	cellGap: 16,
-	breakpoints: {
-		400: {
-			minCellWidth: 188,
-			cellGap: 24,
-		},
-	},
-	aspectRatio: 1 / 1,
-	balanceFillers: true,
-});
-```
+Emits a "calculationDone" event when the grid calculation is completed.
 
-## Events
+**Kind**: instance method of [`BentoGrid`](#BentoGrid)  
+**Emits**: `event:{CustomEvent} calculationDone - The event object contains a "detail" property with the gridContainer as a property.`  
 
-BentoGrid.js emits a custom event named "`calculationDone`" when the grid layout calculation is completed. You can listen to this event to perform additional actions:
+## UserConfig : `Object`
 
-```js
-const gridContainer = document.querySelector(".bentogrid");
+**Kind**: global typedef  
+**Properties**
 
-gridContainer.addEventListener("calculationDone", (event) => {
-	console.log("Calculation done for", event.detail.gridContainer);
-});
-```
+| Name                    | Type                            | Default                                                                             | Description                                                                                             |
+| ----------------------- | ------------------------------- | ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| \[target\]              | `string` \| `HTMLElement`   | `'.bentogrid'`                                                                    | The target element to apply the grid to.                                                                |
+| \[minCellWidth\]        | `number`                      | `100`                                                                             | The minimum width of each cell in the grid.                                                             |
+| \[columns\]             | `number`                      | The number of columns to use for the grid. This overrides minCellWidth.             |                                                                                                         |
+| \[cellGap\]             | `number`                      | `0`                                                                               | The space between each cell in the grid.                                                                |
+| \[aspectRatio\]         | `number`                      | `1/1`                                                                             | The aspect ratio of each cell in the grid.                                                              |
+| \[breakpoints\]         | `Object.<number, Breakpoint>` | Breakpoints to set responsive grid behavior. minWidth looks at breakpointReference. |                                                                                                         |
+| \[breakpointReference\] | `string`                      | `'target'`                                                                        | Select if the breakpoints should reference to the target's or the window's width.                       |
+| \[balanceFillers\]      | `boolean`                     | `false`                                                                           | Whether to balance the position of the fillers. If set, they change their position with other elements. |
 
-## Methods
+## Breakpoint : `Object`
 
-BentoGrid.js currently only exposes one method: `recalculate()`. This method can be used to recalculate the grid layout. This is useful, if you dynamically add or remove elements from the grid.
+**Kind**: global typedef  
+**Properties**
 
-```js
-const gridContainer = document.querySelector(".bentogrid");
-const myBento = new BentoGrid({
-	target: gridContainer,
-});
-
-// Add a new element to the grid
-const newElement = document.createElement("div");
-newElement.setAttribute("data-bento", "1x1");
-gridContainer.appendChild(newElement);
-
-// Recalculate the grid layout
-myBento.recalculate();
-```
-
-## Disclaimer
-
-BentoGrid.js was concepted by a human and written together with ChatGPT. It is not affiliated with Apple in any way. Usage at your own risk.
+| Name             | Type       | Description                                                             |
+| ---------------- | ---------- | ----------------------------------------------------------------------- |
+| \[minCellWidth\] | `number` | The minimum width of each cell in the grid.                             |
+| \[cellGap\]      | `number` | The space between each cell in the grid.                                |
+| \[columns\]      | `number` | The number of columns to use for the grid. This overrides minCellWidth. |

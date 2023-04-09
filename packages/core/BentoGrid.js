@@ -1,19 +1,41 @@
+/**
+ * @typedef {Object} UserConfig
+ * @property {string | HTMLElement} [target='.bentogrid'] - The target element to apply the grid to.
+ * @property {number} [minCellWidth=100] - The minimum width of each cell in the grid.
+ * @property {number} [columns] - The number of columns to use for the grid. This overrides minCellWidth.
+ * @property {number} [cellGap=0] - The space between each cell in the grid.
+ * @property {number} [aspectRatio=1/1] - The aspect ratio of each cell in the grid.
+ * @property {Object.<number, Breakpoint>} [breakpoints] - Breakpoints to set responsive grid behavior. minWidth looks at breakpointReference.
+ * @property {string} [breakpointReference='target'] - Select if the breakpoints should reference to the target's or the window's width.
+ * @property {boolean} [balanceFillers=false] - Whether to balance the position of the fillers. If set, they change their position with other elements.
+ */
+
+/**
+ * @typedef {Object} Breakpoint
+ * @property {number} [minCellWidth] - The minimum width of each cell in the grid.
+ * @property {number} [cellGap] - The space between each cell in the grid.
+ * @property {number} [columns] - The number of columns to use for the grid. This overrides minCellWidth.
+ */
+
 class BentoGrid {
+  /**
+   * Create a new BentoGrid instance.
+   * @param {UserConfig} userConfig - User configuration for the grid.
+   */
   constructor(userConfig) {
     this.config = {
       ...{
-        target: ".bentogrid",
+        target: '.bentogrid',
         columns: undefined,
         minCellWidth: 100,
         cellGap: 0,
         aspectRatio: 1 / 1,
         breakpoints: [],
         balanceFillers: false,
-        breakpointReference: 'target'
+        breakpointReference: 'target',
       },
-      ...userConfig
+      ...userConfig,
     };
-
     // Check if config.target is a string or an HTMLElement
     this.gridContainer =
       typeof this.config.target === "string"
@@ -71,7 +93,7 @@ class BentoGrid {
       if (width >= breakpointKey) {
         if (breakpoint.columns) {
           activeBreakpoint.columns = breakpoint.columns;
-          activeBreakpoint.minCellWidth = undefined;
+          delete activeBreakpoint.minCellWidth;
           break;
         } else if (breakpoint.minCellWidth) {
           activeBreakpoint.minCellWidth = breakpoint.minCellWidth;
@@ -360,12 +382,20 @@ class BentoGrid {
     this.resizeObserver.observe(this.gridContainer);
   }
 
+  /**
+   * Recalculate the grid layout.
+   * Useful for cases when elements are added, removed, or visibility changes.
+   */
   recalculate() {
-    // Check if elements were added/removed or are now visible/invisible.
     this.setElements();
     this.updateGrid();
   }
 
+  /**
+   * Emits a "calculationDone" event when the grid calculation is completed.
+   * @method
+   * @emits {CustomEvent} calculationDone - The event object contains a "detail" property with the gridContainer as a property.
+   */
   emitCalculationDoneEvent() {
     const calculationDoneEvent = new CustomEvent("calculationDone", {
       detail: {

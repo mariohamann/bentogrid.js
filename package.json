@@ -1,18 +1,10 @@
 {
   "name": "@bentogrid/root",
-  "version": "1.0.0",
-  "description": "A responsive, flexible bento grid library.",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "type": "module",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/mariohamann/bentogrid.js.git"
-  },
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/mariohamann/bentogrid.js/issues"
-  },
-  "homepage": "https://github.com/mariohamann/bentogrid.js#readme"
+  "scripts": {
+    "generate": "pnpm generate-readme && pnpm generate-types",
+    "generate-readme": "pnpm --filter @bentogrid/docs generate-readme",
+    "generate-types": "pnpm --filter @bentogrid/core generate-types"
+  }
 }

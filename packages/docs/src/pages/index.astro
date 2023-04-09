@@ -1,5 +1,14 @@
 ---
 import BentoItem from "../components/BentoItem.astro";
+import packageJson from "../../../core/package.json";
+import yaml from "js-yaml";
+import fs from "fs";
+import Markdoc from "@markdoc/markdoc";
+
+// Get frontmatter from README
+const readmeMdoc = fs.readFileSync("./src/data/readme.mdoc", "utf8");
+const ast = Markdoc.parse(readmeMdoc);
+const frontmatter = yaml.load(ast.attributes.frontmatter);
 ---
 
 <html lang='en'>
@@ -62,7 +71,7 @@ import BentoItem from "../components/BentoItem.astro";
 				dataBento='2x2'
 				dataBentoNoSwap
 				title='BentoGrid.js'
-				subtitle='Create beautiful and responsive grid layouts with BentoGrid.js, a smart library that automatically positions elements depending on their size in a grid for you.'
+				subtitle={packageJson.description}
 			>
 				<img
 					class='absolute right-6 bottom-0 h-[42%]'
@@ -72,7 +81,7 @@ import BentoItem from "../components/BentoItem.astro";
 			<BentoItem
 				dataBento='2x1'
 				title='Flexible'
-				subtitle='Easily set the size of elements via attributes'
+				subtitle={frontmatter.flexible}
 			>
 				<img
 					class='absolute right-1 bottom-0 h-3/4'
@@ -82,7 +91,7 @@ import BentoItem from "../components/BentoItem.astro";
 			<BentoItem
 				dataBento='1x2'
 				title='Smart'
-				subtitle='Automatic positioning of elements in the grid'
+				subtitle={frontmatter.smart}
 			>
 				<img
 					class='absolute right-0 bottom-0 w-3/5'
@@ -93,7 +102,7 @@ import BentoItem from "../components/BentoItem.astro";
 				color='shade'
 				dataBento='1x2'
 				title='Light­weight'
-				subtitle='Only 2KB (minified) with zero dependencies'
+				subtitle={frontmatter.lightweight}
 			>
 				<img
 					class='absolute right-0 bottom-6 w-[55%]'
@@ -103,7 +112,7 @@ import BentoItem from "../components/BentoItem.astro";
 			<BentoItem
 				dataBento='2x1'
 				title='Responsive'
-				subtitle='Adaptive grid layouts for various screen sizes'
+				subtitle={frontmatter.responsive}
 			>
 				<img
 					class='absolute right-0 bottom-0 h-full'
