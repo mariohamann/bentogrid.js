@@ -1,5 +1,6 @@
 ---
 import { Code } from "astro/components";
+import GridCode from "../Wrappers/GridCode.astro";
 ---
 
 <h3>Example 1: Unstyled Fillers</h3>
@@ -27,7 +28,7 @@ import { Code } from "astro/components";
 	});
 </script>
 
-<div class='flex gap-8 items-start not-prose'>
+<GridCode>
 	<div id='bentogrid-elements-fillers' class='bentogrid w-1/2 flex-shrink-0'>
 		<div data-bento='2x2'></div>
 		<div data-bento='1x1'></div>
@@ -46,4 +47,4 @@ import { Code } from "astro/components";
 			theme='dark-plus'
 		/>
 	</div>
-</div>
+</GridCode>
