@@ -48,6 +48,10 @@ export type Breakpoint = {
      * - The number of columns to use for the grid. This overrides minCellWidth.
      */
     columns?: number;
+    /**
+     * - The aspect ratio of each cell in the grid.
+     */
+    aspectRatio?: number;
 };
 /**
  * @typedef {Object} UserConfig
@@ -65,6 +69,7 @@ export type Breakpoint = {
  * @property {number} [minCellWidth] - The minimum width of each cell in the grid.
  * @property {number} [cellGap] - The space between each cell in the grid.
  * @property {number} [columns] - The number of columns to use for the grid. This overrides minCellWidth.
+ * @property {number} [aspectRatio] - The aspect ratio of each cell in the grid.
  */
 declare class BentoGrid {
     /**
@@ -84,7 +89,7 @@ declare class BentoGrid {
         /**
          * - The number of columns to use for the grid. This overrides minCellWidth.
          */
-        columns: number;
+        columns?: number;
         /**
          * - The space between each cell in the grid.
          */
@@ -126,7 +131,7 @@ declare class BentoGrid {
         /**
          * - The number of columns to use for the grid. This overrides minCellWidth.
          */
-        columns: number;
+        columns?: number;
         /**
          * - The space between each cell in the grid.
          */

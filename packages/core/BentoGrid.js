@@ -15,6 +15,7 @@
  * @property {number} [minCellWidth] - The minimum width of each cell in the grid.
  * @property {number} [cellGap] - The space between each cell in the grid.
  * @property {number} [columns] - The number of columns to use for the grid. This overrides minCellWidth.
+ * @property {number} [aspectRatio] - The aspect ratio of each cell in the grid.
  */
 
 class BentoGrid {
@@ -26,7 +27,6 @@ class BentoGrid {
     this.config = {
       ...{
         target: '.bentogrid',
-        columns: undefined,
         minCellWidth: 100,
         cellGap: 0,
         aspectRatio: 1 / 1,
@@ -78,28 +78,23 @@ class BentoGrid {
 
     let activeBreakpoint = { ...this.config };
 
+    const cleanupBreakpoint = (breakpoint) => {
+      if (breakpoint.columns) {
+        delete activeBreakpoint.minCellWidth;
+      } else if (breakpoint.minCellWidth) {
+        delete activeBreakpoint.columns;
+      }
+      console.log(activeBreakpoint)
+    }
+
+    cleanupBreakpoint(activeBreakpoint)
+
     const breakpointKeys = Object.keys(this.config.breakpoints).map(Number).sort((a, b) => a - b);
 
     for (const breakpointKey of breakpointKeys) {
       if (width >= breakpointKey) {
         activeBreakpoint = { ...activeBreakpoint, ...this.config.breakpoints[breakpointKey] };
-      }
-    }
-
-    // Look up for the last defined columns or minCellWidth values from fitting breakpoints
-    for (let i = breakpointKeys.length - 1; i >= 0; i--) {
-      const breakpointKey = breakpointKeys[i];
-      const breakpoint = this.config.breakpoints[breakpointKey];
-      if (width >= breakpointKey) {
-        if (breakpoint.columns) {
-          activeBreakpoint.columns = breakpoint.columns;
-          delete activeBreakpoint.minCellWidth;
-          break;
-        } else if (breakpoint.minCellWidth) {
-          activeBreakpoint.minCellWidth = breakpoint.minCellWidth;
-          activeBreakpoint.columns = undefined;
-          break;
-        }
+        cleanupBreakpoint(this.config.breakpoints[breakpointKey])
       }
     }
 
@@ -108,15 +103,30 @@ class BentoGrid {
 
   setupGrid() {
     const breakpoint = this.getBreakpoint();
-    const totalColumns =
-      breakpoint.columns ||
-      Math.floor(
-        (this.gridContainer.clientWidth + breakpoint.cellGap) /
-        (breakpoint.minCellWidth + breakpoint.cellGap)
-      );
+
+    // Calculate the total number of columns
+    const totalColumns = breakpoint.columns || Math.floor(
+      (this.gridContainer.clientWidth + breakpoint.cellGap) /
+      (breakpoint.minCellWidth + breakpoint.cellGap)
+    );
+
+    console.log(breakpoint);
+
+    // Configure the grid container styles
     this.gridContainer.style.display = "grid";
     this.gridContainer.style.gridTemplateColumns = `repeat(${totalColumns}, minmax(${breakpoint.minCellWidth}px, 1fr))`;
     this.gridContainer.style.gridGap = `${breakpoint.cellGap}px`;
+
+    // Calculate the cell width based on the container width, total columns and cell gap
+    const containerWidth = this.gridContainer.clientWidth;
+    const cellWidth = (containerWidth - (totalColumns - 1) * breakpoint.cellGap) / totalColumns;
+
+    // Calculate the row height based on the aspect ratio and cell width
+    const rowHeight = cellWidth / breakpoint.aspectRatio;
+
+    // Set the row height as a CSS variable to read it later in the updateGrid method
+    this.gridContainer.style.setProperty("--bento-row-height", `${rowHeight}px`);
+
     return totalColumns;
   }
 
@@ -214,10 +224,7 @@ class BentoGrid {
       maxRow = Math.max(maxRow, position.row + gridRowSpan);
     });
 
-
-    const breakpoint = this.getBreakpoint();
-
-    this.gridContainer.style.gridTemplateRows = `repeat(${maxRow}, minmax(${breakpoint.minCellWidth}px, 1fr))`;
+    this.gridContainer.style.gridTemplateRows = `repeat(${maxRow}, minmax(var(--bento-row-height), 1fr))`;
 
     // Find the maximum row
     this.gridItems.forEach((item) => {

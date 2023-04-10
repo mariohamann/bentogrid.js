@@ -78,3 +78,4 @@ Emits a "calculationDone" event when the grid calculation is completed.
 | \[minCellWidth\] | `number` | The minimum width of each cell in the grid.                             |
 | \[cellGap\]      | `number` | The space between each cell in the grid.                                |
 | \[columns\]      | `number` | The number of columns to use for the grid. This overrides minCellWidth. |
+| \[aspectRatio\]  | `number` | The aspect ratio of each cell in the grid.                              |

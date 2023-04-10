@@ -1,6 +1,6 @@
 {
   "name": "@bentogrid/core",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A smart library that automatically positions elements depending on their size in a grid to create responsive and beautiful layouts.",
   "main": "./BentoGrid.js",
   "scripts": {
