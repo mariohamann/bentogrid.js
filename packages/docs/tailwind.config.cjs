@@ -38,5 +38,5 @@ module.exports = {
       }
     },
   },
-  plugins: [require('@mariohamann/tailwindcss-var')],
+  plugins: [require('@mariohamann/tailwindcss-var'), require('@tailwindcss/typography')],
 }

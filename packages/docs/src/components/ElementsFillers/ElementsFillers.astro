@@ -1,0 +1,42 @@
+---
+import Code1 from "./Code-1.astro";
+import Code2 from "./Code-2.astro";
+import Code3 from "./Code-3.astro";
+---
+
+<h2>Elements vs. Fillers</h2>
+<h3>Elements</h3>
+<ul>
+	<li>
+		<b>Elements are the items that you want to display in your grid.</b>
+	</li>
+	<li>
+		Elements are defined by having the attribute <code
+			>data-bento="2x3"</code
+		>.
+	</li>
+	<li>Hidden Elements are ignored.</li>
+</ul>
+<h3>Fillers</h3>
+<ul>
+	<li>
+		<b
+			>Fillers are placeholders that are used to fill the empty space in
+			your grid.</b
+		>
+	</li>
+	<li>
+		Set Fillers by omitting the attribute. They are automatically cloned in
+		a loop.
+	</li>
+	<li>
+		If you don't set Fillers, empty <code>divs</code> will be created.
+	</li>
+	<li>
+		Fillers get the class <code>.bento-filler</code> when they are visible.
+	</li>
+	<li>Fillers grow as big as possible.</li>
+</ul>
+<Code1 />
+<Code2 />
+<Code3 />

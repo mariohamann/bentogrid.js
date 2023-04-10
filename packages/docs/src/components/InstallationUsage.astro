@@ -1,0 +1,41 @@
+---
+import { Code } from "astro/components";
+import packageJson from "../../../core/package.json";
+---
+
+<h2>Installation</h2>
+<h3>HTML</h3>
+<Code
+	code={`<script type="module">
+	import BentoGrid from "https://cdn.jsdelivr.net/npm/@bentogrid/core@${packageJson.version}/BentoGrid.min.js";
+</script>`}
+	lang='html'
+	theme='dark-plus'
+/>
+
+<h3>npm</h3>
+<Code code='npm i @bentogrid/core' lang='shell' theme='dark-plus' />
+<Code
+	code='import BentoGrid from "@bentogrid/core";'
+	lang='js'
+	theme='dark-plus'
+/>
+
+<h2>Basic Usage</h2>
+<Code
+	code={`<div class="bentogrid">
+	<div data-bento="1x1"></div>
+	<div data-bento="2x2"></div>
+	<div data-bento="2x1"></div>
+	<!-- Add elements or fillers -->
+</div>`}
+	lang='html'
+	theme='dark-plus'
+/>
+<Code
+	code={`const myBento = new BentoGrid({
+	// Add configuration options
+});`}
+	lang='js'
+	theme='dark-plus'
+/>

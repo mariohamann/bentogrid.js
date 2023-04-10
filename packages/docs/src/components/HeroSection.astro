@@ -1,0 +1,103 @@
+---
+import BentoItem from "./BentoItem.astro";
+import packageJson from "../../../core/package.json";
+import yaml from "js-yaml";
+import fs from "fs";
+import Markdoc from "@markdoc/markdoc";
+
+// Get frontmatter from README
+const readmeMdoc = fs.readFileSync("./src/data/readme.mdoc", "utf8");
+const ast = Markdoc.parse(readmeMdoc);
+const frontmatter = yaml.load(ast.attributes.frontmatter);
+---
+
+<script>
+	import BentoGrid from "@bentogrid/core";
+	new BentoGrid({
+		cellGap: 16,
+		target: "#herogrid",
+		balanceFillers: true,
+		columns: 2,
+		aspectRatio: 0,
+		breakpoints: {
+			400: {
+				minCellWidth: 188,
+				cellGap: 24,
+				aspectRatio: 4 / 3,
+			},
+			680: {
+				aspectRatio: 1,
+			},
+		},
+		breakpointReference: "target",
+	});
+</script>
+
+<div id='herogrid' class='max-w-[1100px] mx-auto xl:my-20'>
+	<BentoItem
+		color='shade'
+		dataBento='2x2'
+		dataBentoNoSwap
+		title='BentoGrid.js'
+		subtitle={packageJson.description}
+	>
+		<img
+			class='absolute right-6 bottom-0 h-[42%]'
+			src='./images/element-plant.webp'
+		/>
+	</BentoItem>
+	<BentoItem dataBento='2x1' title='Flexible' subtitle={frontmatter.flexible}>
+		<img
+			class='absolute right-1 bottom-0 h-3/4'
+			src='./images/element-circle.webp'
+		/>
+	</BentoItem>
+	<BentoItem dataBento='1x2' title='Smart' subtitle={frontmatter.smart}>
+		<img
+			class='absolute right-0 bottom-0 w-3/5'
+			src='./images/element-smart.webp'
+		/>
+	</BentoItem>
+	<BentoItem
+		color='shade'
+		dataBento='1x2'
+		title='Light­weight'
+		subtitle={frontmatter.lightweight}
+	>
+		<img
+			class='absolute right-0 bottom-6 w-[55%]'
+			src='./images/element-feather.webp'
+		/>
+	</BentoItem>
+	<BentoItem
+		dataBento='2x1'
+		title='Responsive'
+		subtitle={frontmatter.responsive}
+	>
+		<img
+			class='absolute right-0 bottom-0 h-full'
+			src='./images/element-stairs.webp'
+		/>
+	</BentoItem>
+	<BentoItem color={"dark"} dataBento='1x1'>
+		<div class='flex h-full items-end'>
+			<p class='text-right'>
+				Inspired by <a
+					class='underline-offset-[3px] decoration-sand-100/50 hover:decoration-sand-100 underline'
+					href='https://apple-summary-slides.vercel.app/event-AppleEventSeptember2022'
+					>Apple's summary slides</a
+				> and <a
+					class='underline-offset-[3px] decoration-sand-100/50 hover:decoration-sand-100 underline'
+					href='https://bento.me'>bento.me</a
+				>
+			</p>
+		</div>
+	</BentoItem>
+	<BentoItem>
+		<div
+			class='absolute right-0 bottom-0 w-full h-full bg-repeat bg-contain opacity-50 saturate-[80%] bg-center'
+			style="background-image: url('./images/element-grid-tile.webp')"
+		>
+		</div>
+	</BentoItem>
+</div>
