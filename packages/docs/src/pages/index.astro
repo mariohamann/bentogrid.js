@@ -2,6 +2,7 @@
 import HeroSection from "../components/HeroSection.astro";
 import InstallationUsage from "../components/InstallationUsage.astro";
 import ElementsFillers from "../components/ElementsFillers/ElementsFillers.astro";
+import Footer from "../components/Footer.astro";
 ---
 
 <html lang='en'>
@@ -10,13 +11,23 @@ import ElementsFillers from "../components/ElementsFillers/ElementsFillers.astro
 		<meta name='viewport' content='width=device-width' />
 		<meta name='generator' content={Astro.generator} />
 		<title>BentoGrid.js</title>
-		<link rel='preconnect' href='https://fonts.googleapis.com' />
-		<link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />
-		<link
-			href='https://fonts.googleapis.com/css2?family=M+PLUS+1+Code&display=swap'
-			rel='stylesheet'
-		/>
 		<style is:global>
+			.prose-stone {
+				--tw-prose-bullets: var(--tw-prose-invert-bullets);
+			}
+			/* m-plus-1-code-regular - latin */
+			@font-face {
+				font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+				font-family: "M PLUS 1 Code";
+				font-style: normal;
+				font-weight: 400;
+				src: url("/bentogrid.js/fonts/m-plus-1-code-v7-latin-regular.woff2")
+						format("woff2"),
+					/* Chrome 36+, Opera 23+, Firefox 39+ */
+						url("/bentogrid.js/fonts/m-plus-1-code-v7-latin-regular.woff")
+						format("woff"); /* Chrome 5+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+			}
+
 			/* m-plus-2-300 - latin */
 			@font-face {
 				font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
@@ -47,43 +58,30 @@ import ElementsFillers from "../components/ElementsFillers/ElementsFillers.astro
 				font-size: 16px;
 				border-radius: 8px;
 			}
-			.astro-code span {
-				font-family: "M PLUS 1 Code", monospace !important;
+			.astro-code span,
+			code,
+			kbd,
+			samp,
+			pre {
+				font-family: "M PLUS 1 Code", ui-monospace, SFMono-Regular,
+					Menlo, Monaco, Consolas, "Liberation Mono", "Courier New",
+					monospace !important;
+
+				font-size: 16px !important;
 			}
 		</style>
 	</head>
 	<body class='p-4 font-sans sm:p-6 md:p-8 lg:p-12 bg-sand-100'>
 		<HeroSection />
-		<div class='prose mx-auto mt-24'>
+		<div class='prose prose-stone mx-auto mt-24'>
 			<InstallationUsage />
 			<ElementsFillers />
+
+			<h2 id='config'>Config</h2>
+			<blockquote>
+				Further documentation for the <code>Config</code> is coming soon.
+			</blockquote>
 		</div>
-		<footer class='bg-black rounded-xl mt-32 max-w-[1100px] mx-auto'>
-			<div
-				class='mx-auto lg:px-8 max-w-7xl px-6 lg:flex lg:items-center lg:justify-between py-12'
-			>
-				<div
-					class='flex flex-col justify-center gap-y-4 lg:mb-0 mb-8 md:flex-row md:gap-x-9 md:order-2'
-				>
-					<a
-						href='mailto:mail@mariohamann.de'
-						class='flex items-center font-bold gap-2 hover:text-sand-100 leading-6 text-base text-white'
-						><span>mail@mariohamann.de</span>
-					</a><a
-						href='https://indieweb.social/@mariohamann'
-						class='flex items-center font-bold gap-2 hover:text-sand-100 leading-6 text-base text-white'
-						><span>@mariohamann@indieweb.social</span>
-					</a><a
-						href='https://mariohamann.de/impressum'
-						class='flex items-center font-bold gap-2 hover:text-sand-100 leading-6 text-base text-white'
-						><span>Imprint</span>
-					</a>
-				</div><div class='md:mt-0 md:order-1 mt-8'>
-					<p class='text-center leading-5 text-base text-sand-100'>
-						© 2023 Mario Hamann
-					</p>
-				</div>
-			</div>
-		</footer>
+		<Footer />
 	</body>
 </html>

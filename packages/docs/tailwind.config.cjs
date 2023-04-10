@@ -5,6 +5,7 @@ module.exports = {
     extend: {
       fontFamily: {
         'sans': "'M PLUS 2', sans-serif",
+        'code': `"M PLUS 1 Code", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace`
       },
       colors: {
         black: "#020202",
