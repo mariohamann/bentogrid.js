@@ -1,8 +1,8 @@
 ---
-import HeroSection from "../components/HeroSection.astro";
-import InstallationUsage from "../components/InstallationUsage.astro";
-import ElementsFillers from "../components/ElementsFillers/ElementsFillers.astro";
-import Footer from "../components/Footer.astro";
+import Hero from "../partials/Hero.astro";
+import InstallationUsage from "../partials/InstallationUsage.astro";
+import ElementsFillers from "../partials/ElementsFillers/ElementsFillers.astro";
+import Footer from "../partials/Footer.astro";
 ---
 
 <html lang='en'>
@@ -72,7 +72,7 @@ import Footer from "../components/Footer.astro";
 		</style>
 	</head>
 	<body class='p-4 font-sans sm:p-6 md:p-8 lg:p-12 bg-sand-100'>
-		<HeroSection />
+		<Hero />
 		<div class='prose prose-stone mx-auto mt-24'>
 			<InstallationUsage />
 			<ElementsFillers />
