@@ -14,31 +14,25 @@ import GridCode from "../../components/GridCode.astro";
 	});
 </script>
 
-<GridCode>
-	<div
-		id='bentogrid-elements-fillers-3'
-		class='bentogrid w-1/2 flex-shrink-0'
-	>
-		<div data-bento='2x2'></div>
-		<div data-bento='1x1'></div>
-		<div data-bento='2x3'></div>
-		<div data-bento='2x1'></div>
-		<div data-bento='3x3'></div>
-		<div data-bento='1x4'></div>
-		<div data-bento='2x2'></div>
-		<div class='!bg-water-300'></div>
-		<div class='!bg-water-600'></div>
-		<div class='!bg-water-900'></div>
-	</div>
-	<Code
-		code={`<div id='bentogrid'>
+<GridCode
+	id='bentogrid-elements-fillers-3'
+	code={`<div id='bentogrid'>
   <div data-bento='2x2'></div>
   ...
   <div class='bg-water-300'></div>
   <div class='bg-water-600'></div>
   <div class='bg-water-900'></div>
 </div>`}
-		lang='html'
-		theme='dark-plus'
-	/>
+	lang='html'
+>
+	<div data-bento='2x2'></div>
+	<div data-bento='1x1'></div>
+	<div data-bento='2x3'></div>
+	<div data-bento='2x1'></div>
+	<div data-bento='3x3'></div>
+	<div data-bento='1x4'></div>
+	<div data-bento='2x2'></div>
+	<div class='!bg-water-300'></div>
+	<div class='!bg-water-600'></div>
+	<div class='!bg-water-900'></div>
 </GridCode>

@@ -1,5 +1,17 @@
-<div
-	class='flex gap-4 sm:gap-8 items-start not-prose flex-col-reverse sm:flex-row'
->
-	<slot />
+---
+import { Code } from "astro/components";
+export interface Props {
+	id: string;
+	code: string;
+	lang: any;
+}
+
+const { id, code, lang } = Astro.props;
+---
+
+<div class='flex gap-4 sm:gap-8 items-start not-prose flex-col sm:flex-row'>
+	<div class='bentogrid w-3/5 md:w-1/2 flex-shrink-0' id={id}>
+		<slot />
+	</div>
+	<Code code={code} lang={lang} theme='dark-plus' />
 </div>
