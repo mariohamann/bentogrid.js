@@ -1,0 +1,35 @@
+---
+import JSDocs from "../data/jsdoc-ast.json";
+
+export interface Props {
+	name: string;
+	noDefault?: boolean;
+}
+
+const { name, noDefault } = Astro.props;
+
+const option = JSDocs[0].properties?.find((p) => p.name === name);
+---
+
+<h3><code class='!text-xl'>{option?.name}</code></h3>
+<ul>
+	<li>
+		<b>Description:</b>
+		{option?.description}
+	</li>
+	<li>
+		<b>Type:</b><code class='ml-2 before:contents after:contents'
+			>{option?.type.names.join(" | ")}</code
+		>
+	</li>
+	{
+		!noDefault && option?.defaultvalue && (
+			<li>
+				<b>Default:</b>
+				<code class='ml-2 before:contents after:contents'>
+					{option?.defaultvalue}
+				</code>
+			</li>
+		)
+	}
+</ul>

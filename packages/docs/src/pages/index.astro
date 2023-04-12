@@ -2,6 +2,8 @@
 import Hero from "../partials/Hero.astro";
 import InstallationUsage from "../partials/InstallationUsage.astro";
 import ElementsFillers from "../partials/ElementsFillers/ElementsFillers.astro";
+import ConfigOption from "../components/ConfigOption.astro";
+
 import Footer from "../partials/Footer.astro";
 ---
 
@@ -14,6 +16,7 @@ import Footer from "../partials/Footer.astro";
 		<style is:global>
 			.prose-stone {
 				--tw-prose-bullets: var(--tw-prose-invert-bullets);
+				--tw-prose-hr: var(--tw-prose-invert-hr);
 			}
 			/* m-plus-1-code-regular - latin */
 			@font-face {
@@ -75,9 +78,26 @@ import Footer from "../partials/Footer.astro";
 		<Hero />
 		<div class='prose prose-stone mx-auto mt-24'>
 			<InstallationUsage />
+			<hr />
 			<ElementsFillers />
-
-			<h2 id='config'>Config</h2>
+			<hr />
+			<h2 id='config'>UserConfig</h2>
+			<ConfigOption name='target' />
+			<ConfigOption name='cellGap' />
+			<ConfigOption name='aspectRatio' />
+			<ConfigOption name='balanceFillers' />
+			<ConfigOption name='minCellWidth' />
+			<ConfigOption name='columns' />
+			<ConfigOption name='breakpoints' />
+			<ConfigOption name='breakpointReference' />
+			<blockquote>
+				Further documentation for the <code>Config</code> is coming soon.
+			</blockquote>
+			<h2 id='config'>Breakpoint</h2>
+			<ConfigOption name='cellGap' noDefault />
+			<ConfigOption name='aspectRatio' noDefault />
+			<ConfigOption name='minCellWidth' noDefault />
+			<ConfigOption name='columns' noDefault />
 			<blockquote>
 				Further documentation for the <code>Config</code> is coming soon.
 			</blockquote>

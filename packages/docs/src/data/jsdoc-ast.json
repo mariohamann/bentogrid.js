@@ -1,0 +1,3607 @@
+[
+    {
+        "comment": "/**\n * @typedef {Object} UserConfig\n * @property {string | HTMLElement} [target='.bentogrid'] - The target element to apply the grid to.\n * @property {number} [minCellWidth=100] - The minimum width of each cell in the grid.\n * @property {number} [columns=undefined] - The number of columns to use for the grid. This overrides minCellWidth.\n * @property {number} [cellGap=0] - The space between each cell in the grid.\n * @property {number} [aspectRatio=1/1] - The aspect ratio of each cell in the grid.\n * @property {Object.<number, Breakpoint>} [breakpoints] - Breakpoints to set responsive grid behavior. minWidth looks at breakpointReference.\n * @property {string} [breakpointReference='target'] - Select if the breakpoints should reference to the target's or the window's width.\n * @property {boolean} [balanceFillers=false] - Whether to balance the position of the fillers. If set, they change their position with other elements.\n */",
+        "meta": {
+            "filename": "BentoGrid.js",
+            "lineno": 1,
+            "columnno": 0,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {}
+        },
+        "kind": "typedef",
+        "name": "UserConfig",
+        "type": {
+            "names": [
+                "Object"
+            ]
+        },
+        "properties": [
+            {
+                "type": {
+                    "names": [
+                        "string",
+                        "HTMLElement"
+                    ]
+                },
+                "optional": true,
+                "defaultvalue": "'.bentogrid'",
+                "description": "The target element to apply the grid to.",
+                "name": "target"
+            },
+            {
+                "type": {
+                    "names": [
+                        "number"
+                    ]
+                },
+                "optional": true,
+                "defaultvalue": 100,
+                "description": "The minimum width of each cell in the grid.",
+                "name": "minCellWidth"
+            },
+            {
+                "type": {
+                    "names": [
+                        "number"
+                    ]
+                },
+                "optional": true,
+                "description": "The number of columns to use for the grid. This overrides minCellWidth.",
+                "name": "columns"
+            },
+            {
+                "type": {
+                    "names": [
+                        "number"
+                    ]
+                },
+                "optional": true,
+                "defaultvalue": 0,
+                "description": "The space between each cell in the grid.",
+                "name": "cellGap"
+            },
+            {
+                "type": {
+                    "names": [
+                        "number"
+                    ]
+                },
+                "optional": true,
+                "defaultvalue": "1/1",
+                "description": "The aspect ratio of each cell in the grid.",
+                "name": "aspectRatio"
+            },
+            {
+                "type": {
+                    "names": [
+                        "Object.<number, Breakpoint>"
+                    ]
+                },
+                "optional": true,
+                "description": "Breakpoints to set responsive grid behavior. minWidth looks at breakpointReference.",
+                "name": "breakpoints"
+            },
+            {
+                "type": {
+                    "names": [
+                        "string"
+                    ]
+                },
+                "optional": true,
+                "defaultvalue": "'target'",
+                "description": "Select if the breakpoints should reference to the target's or the window's width.",
+                "name": "breakpointReference"
+            },
+            {
+                "type": {
+                    "names": [
+                        "boolean"
+                    ]
+                },
+                "optional": true,
+                "defaultvalue": false,
+                "description": "Whether to balance the position of the fillers. If set, they change their position with other elements.",
+                "name": "balanceFillers"
+            }
+        ],
+        "longname": "UserConfig",
+        "scope": "global"
+    },
+    {
+        "comment": "/**\n * @typedef {Object} Breakpoint\n * @property {number} [minCellWidth] - The minimum width of each cell in the grid.\n * @property {number} [cellGap] - The space between each cell in the grid.\n * @property {number} [columns] - The number of columns to use for the grid. This overrides minCellWidth.\n * @property {number} [aspectRatio] - The aspect ratio of each cell in the grid.\n */",
+        "meta": {
+            "filename": "BentoGrid.js",
+            "lineno": 13,
+            "columnno": 0,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {}
+        },
+        "kind": "typedef",
+        "name": "Breakpoint",
+        "type": {
+            "names": [
+                "Object"
+            ]
+        },
+        "properties": [
+            {
+                "type": {
+                    "names": [
+                        "number"
+                    ]
+                },
+                "optional": true,
+                "description": "The minimum width of each cell in the grid.",
+                "name": "minCellWidth"
+            },
+            {
+                "type": {
+                    "names": [
+                        "number"
+                    ]
+                },
+                "optional": true,
+                "description": "The space between each cell in the grid.",
+                "name": "cellGap"
+            },
+            {
+                "type": {
+                    "names": [
+                        "number"
+                    ]
+                },
+                "optional": true,
+                "description": "The number of columns to use for the grid. This overrides minCellWidth.",
+                "name": "columns"
+            },
+            {
+                "type": {
+                    "names": [
+                        "number"
+                    ]
+                },
+                "optional": true,
+                "description": "The aspect ratio of each cell in the grid.",
+                "name": "aspectRatio"
+            }
+        ],
+        "longname": "Breakpoint",
+        "scope": "global"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                1325,
+                14360
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 21,
+            "columnno": 0,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000002",
+                "name": "BentoGrid",
+                "type": "ClassDeclaration",
+                "paramnames": [
+                    "userConfig"
+                ]
+            }
+        },
+        "undocumented": true,
+        "name": "BentoGrid",
+        "longname": "BentoGrid",
+        "kind": "class",
+        "scope": "global"
+    },
+    {
+        "comment": "/**\n   * Create a new BentoGrid instance.\n   * @param {UserConfig} userConfig - User configuration for the grid.\n   */",
+        "meta": {
+            "range": [
+                1466,
+                2247
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 26,
+            "columnno": 2,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000005",
+                "name": "BentoGrid",
+                "type": "MethodDefinition",
+                "paramnames": [
+                    "userConfig"
+                ]
+            },
+            "vars": {
+                "": null
+            }
+        },
+        "description": "Create a new BentoGrid instance.",
+        "params": [
+            {
+                "type": {
+                    "names": [
+                        "UserConfig"
+                    ]
+                },
+                "description": "User configuration for the grid.",
+                "name": "userConfig"
+            }
+        ],
+        "name": "BentoGrid",
+        "longname": "BentoGrid",
+        "kind": "class",
+        "scope": "global"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                1496,
+                1758
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 27,
+            "columnno": 4,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000011",
+                "name": "this.config",
+                "type": "ObjectExpression",
+                "value": "{}",
+                "paramnames": []
+            }
+        },
+        "undocumented": true,
+        "name": "config",
+        "longname": "BentoGrid#config",
+        "kind": "member",
+        "memberof": "BentoGrid",
+        "scope": "instance"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                1531,
+                1551
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 29,
+            "columnno": 8,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000018",
+                "name": "target",
+                "type": "Literal",
+                "value": ".bentogrid"
+            }
+        },
+        "undocumented": true,
+        "name": "target",
+        "longname": "target",
+        "kind": "member",
+        "scope": "global"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                1561,
+                1578
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 30,
+            "columnno": 8,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000020",
+                "name": "minCellWidth",
+                "type": "Literal",
+                "value": 100
+            }
+        },
+        "undocumented": true,
+        "name": "minCellWidth",
+        "longname": "minCellWidth",
+        "kind": "member",
+        "scope": "global"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                1588,
+                1598
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 31,
+            "columnno": 8,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000022",
+                "name": "cellGap",
+                "type": "Literal",
+                "value": 0
+            }
+        },
+        "undocumented": true,
+        "name": "cellGap",
+        "longname": "cellGap",
+        "kind": "member",
+        "scope": "global"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                1608,
+                1626
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 32,
+            "columnno": 8,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000024",
+                "name": "aspectRatio",
+                "type": "BinaryExpression",
+                "value": ""
+            }
+        },
+        "undocumented": true,
+        "name": "aspectRatio",
+        "longname": "aspectRatio",
+        "kind": "member",
+        "scope": "global"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                1636,
+                1651
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 33,
+            "columnno": 8,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000028",
+                "name": "breakpoints",
+                "type": "ArrayExpression",
+                "value": "[]"
+            }
+        },
+        "undocumented": true,
+        "name": "breakpoints",
+        "longname": "breakpoints",
+        "kind": "member",
+        "scope": "global"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                1661,
+                1682
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 34,
+            "columnno": 8,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000030",
+                "name": "balanceFillers",
+                "type": "Literal",
+                "value": false
+            }
+        },
+        "undocumented": true,
+        "name": "balanceFillers",
+        "longname": "balanceFillers",
+        "kind": "member",
+        "scope": "global"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                1692,
+                1721
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 35,
+            "columnno": 8,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000032",
+                "name": "breakpointReference",
+                "type": "Literal",
+                "value": "target"
+            }
+        },
+        "undocumented": true,
+        "name": "breakpointReference",
+        "longname": "breakpointReference",
+        "kind": "member",
+        "scope": "global"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                1824,
+                1971
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 40,
+            "columnno": 4,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000037",
+                "name": "this.gridContainer",
+                "type": "ConditionalExpression",
+                "value": "",
+                "paramnames": []
+            }
+        },
+        "undocumented": true,
+        "name": "gridContainer",
+        "longname": "BentoGrid#gridContainer",
+        "kind": "member",
+        "memberof": "BentoGrid",
+        "scope": "instance"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                1978,
+                2004
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 45,
+            "columnno": 4,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000065",
+                "name": "this.gridItems",
+                "type": "Identifier",
+                "value": "undefined",
+                "paramnames": []
+            }
+        },
+        "undocumented": true,
+        "name": "gridItems",
+        "longname": "BentoGrid#gridItems",
+        "kind": "member",
+        "memberof": "BentoGrid",
+        "scope": "instance"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                2010,
+                2034
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 46,
+            "columnno": 4,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000071",
+                "name": "this.fillers",
+                "type": "Identifier",
+                "value": "undefined",
+                "paramnames": []
+            }
+        },
+        "undocumented": true,
+        "name": "fillers",
+        "longname": "BentoGrid#fillers",
+        "kind": "member",
+        "memberof": "BentoGrid",
+        "scope": "instance"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                2065,
+                2093
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 49,
+            "columnno": 4,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000082",
+                "name": "this.prevTotalColumns",
+                "type": "Literal",
+                "value": null,
+                "paramnames": []
+            }
+        },
+        "undocumented": true,
+        "name": "prevTotalColumns",
+        "longname": "BentoGrid#prevTotalColumns",
+        "kind": "member",
+        "memberof": "BentoGrid",
+        "scope": "instance"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                2099,
+                2126
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 50,
+            "columnno": 4,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000088",
+                "name": "this.prevColumnCount",
+                "type": "Literal",
+                "value": null,
+                "paramnames": []
+            }
+        },
+        "undocumented": true,
+        "name": "prevColumnCount",
+        "longname": "BentoGrid#prevColumnCount",
+        "kind": "member",
+        "memberof": "BentoGrid",
+        "scope": "instance"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                2251,
+                2835
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 59,
+            "columnno": 2,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000113",
+                "name": "BentoGrid#setElements",
+                "type": "MethodDefinition",
+                "paramnames": []
+            },
+            "vars": {
+                "": null
+            }
+        },
+        "undocumented": true,
+        "name": "setElements",
+        "longname": "BentoGrid#setElements",
+        "kind": "function",
+        "memberof": "BentoGrid",
+        "scope": "instance",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                2321,
+                2543
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 61,
+            "columnno": 4,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000118",
+                "name": "this.gridItems",
+                "type": "CallExpression",
+                "value": "",
+                "paramnames": []
+            }
+        },
+        "undocumented": true,
+        "name": "gridItems",
+        "longname": "BentoGrid#gridItems",
+        "kind": "member",
+        "memberof": "BentoGrid",
+        "scope": "instance"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                2639,
+                2830
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 68,
+            "columnno": 4,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000154",
+                "name": "this.fillers",
+                "type": "CallExpression",
+                "value": "",
+                "paramnames": []
+            }
+        },
+        "undocumented": true,
+        "name": "fillers",
+        "longname": "BentoGrid#fillers",
+        "kind": "member",
+        "memberof": "BentoGrid",
+        "scope": "instance"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                2839,
+                3732
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 74,
+            "columnno": 2,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000191",
+                "name": "BentoGrid#getBreakpoint",
+                "type": "MethodDefinition",
+                "paramnames": []
+            },
+            "vars": {
+                "": null
+            }
+        },
+        "undocumented": true,
+        "name": "getBreakpoint",
+        "longname": "BentoGrid#getBreakpoint",
+        "kind": "function",
+        "memberof": "BentoGrid",
+        "scope": "instance",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                2867,
+                2984
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 75,
+            "columnno": 10,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000196",
+                "name": "width",
+                "type": "ConditionalExpression",
+                "value": ""
+            }
+        },
+        "undocumented": true,
+        "name": "width",
+        "longname": "<anonymous>~width",
+        "kind": "constant",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                2995,
+                3032
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 79,
+            "columnno": 8,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000215",
+                "name": "activeBreakpoint",
+                "type": "ObjectExpression",
+                "value": "{}"
+            }
+        },
+        "undocumented": true,
+        "name": "activeBreakpoint",
+        "longname": "<anonymous>~activeBreakpoint",
+        "kind": "member",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                3045,
+                3295
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 81,
+            "columnno": 10,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000223",
+                "name": "cleanupBreakpoint",
+                "type": "ArrowFunctionExpression"
+            }
+        },
+        "undocumented": true,
+        "name": "cleanupBreakpoint",
+        "longname": "<anonymous>~cleanupBreakpoint",
+        "kind": "function",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                3348,
+                3435
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 92,
+            "columnno": 10,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000259",
+                "name": "breakpointKeys",
+                "type": "CallExpression",
+                "value": ""
+            }
+        },
+        "undocumented": true,
+        "name": "breakpointKeys",
+        "longname": "<anonymous>~breakpointKeys",
+        "kind": "constant",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                3453,
+                3466
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 94,
+            "columnno": 15,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000285",
+                "name": "breakpointKey"
+            }
+        },
+        "undocumented": true,
+        "name": "breakpointKey",
+        "longname": "<anonymous>~breakpointKey",
+        "kind": "constant",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                3532,
+                3617
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 96,
+            "columnno": 8,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000295",
+                "name": "activeBreakpoint",
+                "type": "ObjectExpression",
+                "funcscope": "<anonymous>",
+                "value": "{}",
+                "paramnames": []
+            }
+        },
+        "undocumented": true,
+        "name": "activeBreakpoint",
+        "longname": "<anonymous>~activeBreakpoint",
+        "kind": "member",
+        "memberof": "<anonymous>",
+        "scope": "inner"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                3736,
+                4906
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 104,
+            "columnno": 2,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000320",
+                "name": "BentoGrid#setupGrid",
+                "type": "MethodDefinition",
+                "paramnames": []
+            },
+            "vars": {
+                "": null
+            }
+        },
+        "undocumented": true,
+        "name": "setupGrid",
+        "longname": "BentoGrid#setupGrid",
+        "kind": "function",
+        "memberof": "BentoGrid",
+        "scope": "instance",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                3760,
+                3793
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 105,
+            "columnno": 10,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000325",
+                "name": "breakpoint",
+                "type": "CallExpression",
+                "value": ""
+            }
+        },
+        "undocumented": true,
+        "name": "breakpoint",
+        "longname": "<anonymous>~breakpoint",
+        "kind": "constant",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                3851,
+                4020
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 108,
+            "columnno": 10,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000332",
+                "name": "totalColumns",
+                "type": "LogicalExpression",
+                "value": ""
+            }
+        },
+        "undocumented": true,
+        "name": "totalColumns",
+        "longname": "<anonymous>~totalColumns",
+        "kind": "constant",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                4100,
+                4141
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 116,
+            "columnno": 4,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000366",
+                "name": "this.gridContainer.style.display",
+                "type": "Literal",
+                "value": "grid",
+                "paramnames": []
+            }
+        },
+        "undocumented": true,
+        "name": "display",
+        "longname": "BentoGrid#gridContainer.style.display",
+        "kind": "member",
+        "memberof": "BentoGrid#gridContainer.style",
+        "scope": "static"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                4147,
+                4262
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 117,
+            "columnno": 4,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000376",
+                "name": "this.gridContainer.style.gridTemplateColumns",
+                "type": "TemplateLiteral",
+                "value": "",
+                "paramnames": []
+            }
+        },
+        "undocumented": true,
+        "name": "gridTemplateColumns",
+        "longname": "BentoGrid#gridContainer.style.gridTemplateColumns",
+        "kind": "member",
+        "memberof": "BentoGrid#gridContainer.style",
+        "scope": "static"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                4268,
+                4328
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 118,
+            "columnno": 4,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000393",
+                "name": "this.gridContainer.style.gridGap",
+                "type": "TemplateLiteral",
+                "value": "",
+                "paramnames": []
+            }
+        },
+        "undocumented": true,
+        "name": "gridGap",
+        "longname": "BentoGrid#gridContainer.style.gridGap",
+        "kind": "member",
+        "memberof": "BentoGrid#gridContainer.style",
+        "scope": "static"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                4430,
+                4477
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 121,
+            "columnno": 10,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000408",
+                "name": "containerWidth",
+                "type": "MemberExpression",
+                "value": "this.gridContainer.clientWidth"
+            }
+        },
+        "undocumented": true,
+        "name": "containerWidth",
+        "longname": "<anonymous>~containerWidth",
+        "kind": "constant",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                4489,
+                4574
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 122,
+            "columnno": 10,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000416",
+                "name": "cellWidth",
+                "type": "BinaryExpression",
+                "value": ""
+            }
+        },
+        "undocumented": true,
+        "name": "cellWidth",
+        "longname": "<anonymous>~cellWidth",
+        "kind": "constant",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                4660,
+                4706
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 125,
+            "columnno": 10,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000430",
+                "name": "rowHeight",
+                "type": "BinaryExpression",
+                "value": ""
+            }
+        },
+        "undocumented": true,
+        "name": "rowHeight",
+        "longname": "<anonymous>~rowHeight",
+        "kind": "constant",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                4910,
+                5021
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 133,
+            "columnno": 2,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000453",
+                "name": "BentoGrid#hideOriginalFillers",
+                "type": "MethodDefinition",
+                "paramnames": []
+            },
+            "vars": {
+                "": null
+            }
+        },
+        "undocumented": true,
+        "name": "hideOriginalFillers",
+        "longname": "BentoGrid#hideOriginalFillers",
+        "kind": "function",
+        "memberof": "BentoGrid",
+        "scope": "instance",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                4979,
+                5008
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 135,
+            "columnno": 6,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000468",
+                "name": "filler.style.display",
+                "type": "Literal",
+                "value": "none",
+                "paramnames": []
+            }
+        },
+        "undocumented": true,
+        "name": "display",
+        "longname": "filler.style.display",
+        "kind": "member",
+        "memberof": "filler.style",
+        "scope": "static"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                5025,
+                5328
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 139,
+            "columnno": 2,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000475",
+                "name": "BentoGrid#removeClonedFillers",
+                "type": "MethodDefinition",
+                "paramnames": []
+            },
+            "vars": {
+                "": null
+            }
+        },
+        "undocumented": true,
+        "name": "removeClonedFillers",
+        "longname": "BentoGrid#removeClonedFillers",
+        "kind": "function",
+        "memberof": "BentoGrid",
+        "scope": "instance",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                5332,
+                12879
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 150,
+            "columnno": 2,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000525",
+                "name": "BentoGrid#updateGrid",
+                "type": "MethodDefinition",
+                "paramnames": []
+            },
+            "vars": {
+                "": null
+            }
+        },
+        "undocumented": true,
+        "name": "updateGrid",
+        "longname": "BentoGrid#updateGrid",
+        "kind": "function",
+        "memberof": "BentoGrid",
+        "scope": "instance",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                5357,
+                5388
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 151,
+            "columnno": 10,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000530",
+                "name": "totalColumns",
+                "type": "CallExpression",
+                "value": ""
+            }
+        },
+        "undocumented": true,
+        "name": "totalColumns",
+        "longname": "<anonymous>~totalColumns",
+        "kind": "constant",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                5492,
+                5507
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 157,
+            "columnno": 10,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000549",
+                "name": "gridMatrix",
+                "type": "ArrayExpression",
+                "value": "[]"
+            }
+        },
+        "undocumented": true,
+        "name": "gridMatrix",
+        "longname": "<anonymous>~gridMatrix",
+        "kind": "constant",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                5517,
+                5527
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 158,
+            "columnno": 8,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000553",
+                "name": "maxRow",
+                "type": "Literal",
+                "value": 0
+            }
+        },
+        "undocumented": true,
+        "name": "maxRow",
+        "longname": "<anonymous>~maxRow",
+        "kind": "member",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                5577,
+                5582
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 161,
+            "columnno": 13,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000558",
+                "name": "i",
+                "type": "Literal",
+                "value": 0
+            }
+        },
+        "undocumented": true,
+        "name": "i",
+        "longname": "<anonymous>~i",
+        "kind": "member",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                5615,
+                5633
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 162,
+            "columnno": 6,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000568",
+                "name": "gridMatrix[undefined]",
+                "type": "ArrayExpression",
+                "funcscope": "<anonymous>",
+                "value": "[]",
+                "paramnames": []
+            }
+        },
+        "undocumented": true,
+        "name": "undefined]",
+        "longname": "<anonymous>~gridMatrix.undefined]",
+        "kind": "member",
+        "memberof": "<anonymous>~gridMatrix",
+        "scope": "static"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                5646,
+                6128
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 165,
+            "columnno": 4,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000573",
+                "name": "getNextAvailablePosition",
+                "type": "FunctionDeclaration",
+                "paramnames": [
+                    "gridColumnSpan",
+                    "gridRowSpan"
+                ]
+            },
+            "vars": {
+                "foundPosition": "<anonymous>~getNextAvailablePosition~foundPosition",
+                "column": "<anonymous>~getNextAvailablePosition~column",
+                "row": "<anonymous>~getNextAvailablePosition~row"
+            }
+        },
+        "undocumented": true,
+        "name": "getNextAvailablePosition",
+        "longname": "<anonymous>~getNextAvailablePosition",
+        "kind": "function",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                5721,
+                5742
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 166,
+            "columnno": 10,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000579",
+                "name": "foundPosition",
+                "type": "Literal",
+                "value": false
+            }
+        },
+        "undocumented": true,
+        "name": "foundPosition",
+        "longname": "<anonymous>~getNextAvailablePosition~foundPosition",
+        "kind": "member",
+        "memberof": "<anonymous>~getNextAvailablePosition",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                5754,
+                5764
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 167,
+            "columnno": 10,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000583",
+                "name": "column",
+                "type": "Literal",
+                "value": 0
+            }
+        },
+        "undocumented": true,
+        "name": "column",
+        "longname": "<anonymous>~getNextAvailablePosition~column",
+        "kind": "member",
+        "memberof": "<anonymous>~getNextAvailablePosition",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                5776,
+                5783
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 168,
+            "columnno": 10,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000587",
+                "name": "row",
+                "type": "Literal",
+                "value": 0
+            }
+        },
+        "undocumented": true,
+        "name": "row",
+        "longname": "<anonymous>~getNextAvailablePosition~row",
+        "kind": "member",
+        "memberof": "<anonymous>~getNextAvailablePosition",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                5904,
+                5924
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 172,
+            "columnno": 10,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000603",
+                "name": "foundPosition",
+                "type": "Literal",
+                "funcscope": "<anonymous>~getNextAvailablePosition",
+                "value": true,
+                "paramnames": []
+            }
+        },
+        "undocumented": true,
+        "name": "foundPosition",
+        "longname": "<anonymous>~getNextAvailablePosition~foundPosition",
+        "kind": "member",
+        "memberof": "<anonymous>~getNextAvailablePosition",
+        "scope": "inner"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                6031,
+                6041
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 176,
+            "columnno": 12,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000618",
+                "name": "column",
+                "type": "Literal",
+                "funcscope": "<anonymous>~getNextAvailablePosition",
+                "value": 0,
+                "paramnames": []
+            }
+        },
+        "undocumented": true,
+        "name": "column",
+        "longname": "<anonymous>~getNextAvailablePosition~column",
+        "kind": "member",
+        "memberof": "<anonymous>~getNextAvailablePosition",
+        "scope": "inner"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                6108,
+                6114
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 182,
+            "columnno": 15,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000626",
+                "name": "column",
+                "type": "Identifier",
+                "value": "column"
+            }
+        },
+        "undocumented": true,
+        "name": "column",
+        "longname": "column",
+        "kind": "member",
+        "scope": "global"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                6116,
+                6119
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 182,
+            "columnno": 23,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000628",
+                "name": "row",
+                "type": "Identifier",
+                "value": "row"
+            }
+        },
+        "undocumented": true,
+        "name": "row",
+        "longname": "row",
+        "kind": "member",
+        "scope": "global"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                6134,
+                6457
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 185,
+            "columnno": 4,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000630",
+                "name": "isPositionAvailable",
+                "type": "FunctionDeclaration",
+                "paramnames": [
+                    "column",
+                    "row",
+                    "gridColumnSpan",
+                    "gridRowSpan"
+                ]
+            },
+            "vars": {
+                "c": "<anonymous>~isPositionAvailable~c",
+                "r": "<anonymous>~isPositionAvailable~r"
+            }
+        },
+        "undocumented": true,
+        "name": "isPositionAvailable",
+        "longname": "<anonymous>~isPositionAvailable",
+        "kind": "function",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                6222,
+                6232
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 186,
+            "columnno": 15,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000639",
+                "name": "c",
+                "type": "Identifier",
+                "value": "column"
+            }
+        },
+        "undocumented": true,
+        "name": "c",
+        "longname": "<anonymous>~isPositionAvailable~c",
+        "kind": "member",
+        "memberof": "<anonymous>~isPositionAvailable",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                6287,
+                6294
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 187,
+            "columnno": 17,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000652",
+                "name": "r",
+                "type": "Identifier",
+                "value": "row"
+            }
+        },
+        "undocumented": true,
+        "name": "r",
+        "longname": "<anonymous>~isPositionAvailable~r",
+        "kind": "member",
+        "memberof": "<anonymous>~isPositionAvailable",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                6463,
+                6784
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 196,
+            "columnno": 4,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000678",
+                "name": "occupyPosition",
+                "type": "FunctionDeclaration",
+                "paramnames": [
+                    "column",
+                    "row",
+                    "gridColumnSpan",
+                    "gridRowSpan"
+                ]
+            },
+            "vars": {
+                "c": "<anonymous>~occupyPosition~c",
+                "r": "<anonymous>~occupyPosition~r",
+                "gridMatrix[undefined]": "<anonymous>~gridMatrix.undefined]",
+                "gridMatrix[undefined][undefined]": "<anonymous>~gridMatrix.undefined][undefined]"
+            }
+        },
+        "undocumented": true,
+        "name": "occupyPosition",
+        "longname": "<anonymous>~occupyPosition",
+        "kind": "function",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                6546,
+                6556
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 197,
+            "columnno": 15,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000687",
+                "name": "c",
+                "type": "Identifier",
+                "value": "column"
+            }
+        },
+        "undocumented": true,
+        "name": "c",
+        "longname": "<anonymous>~occupyPosition~c",
+        "kind": "member",
+        "memberof": "<anonymous>~occupyPosition",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                6611,
+                6618
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 198,
+            "columnno": 17,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000700",
+                "name": "r",
+                "type": "Identifier",
+                "value": "row"
+            }
+        },
+        "undocumented": true,
+        "name": "r",
+        "longname": "<anonymous>~occupyPosition~r",
+        "kind": "member",
+        "memberof": "<anonymous>~occupyPosition",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                6694,
+                6712
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 200,
+            "columnno": 12,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000718",
+                "name": "gridMatrix[undefined]",
+                "type": "ArrayExpression",
+                "value": "[]",
+                "paramnames": []
+            }
+        },
+        "undocumented": true,
+        "name": "undefined]",
+        "longname": "<anonymous>~gridMatrix.undefined]",
+        "kind": "member",
+        "memberof": "<anonymous>~gridMatrix",
+        "scope": "static"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                6736,
+                6759
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 202,
+            "columnno": 10,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000724",
+                "name": "gridMatrix[undefined][undefined]",
+                "type": "Literal",
+                "value": true,
+                "paramnames": []
+            }
+        },
+        "undocumented": true,
+        "name": "undefined][undefined]",
+        "longname": "<anonymous>~gridMatrix.undefined][undefined]",
+        "kind": "member",
+        "memberof": "<anonymous>~gridMatrix",
+        "scope": "static"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                6837,
+                6887
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 208,
+            "columnno": 12,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000742",
+                "name": "bento",
+                "type": "CallExpression",
+                "value": ""
+            }
+        },
+        "undocumented": true,
+        "name": "bento",
+        "longname": "<anonymous>~bento",
+        "kind": "constant",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                6901,
+                6936
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 209,
+            "columnno": 12,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000754",
+                "name": "gridColumnSpan",
+                "type": "CallExpression",
+                "value": ""
+            }
+        },
+        "undocumented": true,
+        "name": "gridColumnSpan",
+        "longname": "<anonymous>~gridColumnSpan",
+        "kind": "constant",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                6950,
+                6982
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 210,
+            "columnno": 12,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000762",
+                "name": "gridRowSpan",
+                "type": "CallExpression",
+                "value": ""
+            }
+        },
+        "undocumented": true,
+        "name": "gridRowSpan",
+        "longname": "<anonymous>~gridRowSpan",
+        "kind": "constant",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                6997,
+                7061
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 212,
+            "columnno": 12,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000770",
+                "name": "position",
+                "type": "CallExpression",
+                "value": ""
+            }
+        },
+        "undocumented": true,
+        "name": "position",
+        "longname": "<anonymous>~position",
+        "kind": "constant",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                7069,
+                7142
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 213,
+            "columnno": 6,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000777",
+                "name": "item.style.gridColumn",
+                "type": "TemplateLiteral",
+                "value": "",
+                "paramnames": []
+            }
+        },
+        "undocumented": true,
+        "name": "gridColumn",
+        "longname": "item.style.gridColumn",
+        "kind": "member",
+        "memberof": "item.style",
+        "scope": "static"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                7150,
+                7214
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 214,
+            "columnno": 6,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000794",
+                "name": "item.style.gridRow",
+                "type": "TemplateLiteral",
+                "value": "",
+                "paramnames": []
+            }
+        },
+        "undocumented": true,
+        "name": "gridRow",
+        "longname": "item.style.gridRow",
+        "kind": "member",
+        "memberof": "item.style",
+        "scope": "static"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                7369,
+                7422
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 224,
+            "columnno": 6,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000822",
+                "name": "maxRow",
+                "type": "CallExpression",
+                "funcscope": "<anonymous>",
+                "value": "",
+                "paramnames": []
+            }
+        },
+        "undocumented": true,
+        "name": "maxRow",
+        "longname": "<anonymous>~maxRow",
+        "kind": "member",
+        "memberof": "<anonymous>",
+        "scope": "inner"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                7437,
+                7538
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 227,
+            "columnno": 4,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000835",
+                "name": "this.gridContainer.style.gridTemplateRows",
+                "type": "TemplateLiteral",
+                "value": "",
+                "paramnames": []
+            }
+        },
+        "undocumented": true,
+        "name": "gridTemplateRows",
+        "longname": "BentoGrid#gridContainer.style.gridTemplateRows",
+        "kind": "member",
+        "memberof": "BentoGrid#gridContainer.style",
+        "scope": "static"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                7620,
+                7679
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 231,
+            "columnno": 12,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000858",
+                "name": "gridRowStart",
+                "type": "CallExpression",
+                "value": ""
+            }
+        },
+        "undocumented": true,
+        "name": "gridRowStart",
+        "longname": "<anonymous>~gridRowStart",
+        "kind": "constant",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                7693,
+                7781
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 232,
+            "columnno": 12,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000874",
+                "name": "gridRowSpan",
+                "type": "CallExpression",
+                "value": ""
+            }
+        },
+        "undocumented": true,
+        "name": "gridRowSpan",
+        "longname": "<anonymous>~gridRowSpan",
+        "kind": "constant",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                7789,
+                7846
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 235,
+            "columnno": 6,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000896",
+                "name": "maxRow",
+                "type": "CallExpression",
+                "funcscope": "<anonymous>",
+                "value": "",
+                "paramnames": []
+            }
+        },
+        "undocumented": true,
+        "name": "maxRow",
+        "longname": "<anonymous>~maxRow",
+        "kind": "member",
+        "memberof": "<anonymous>",
+        "scope": "inner"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                7866,
+                12775
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 237,
+            "columnno": 10,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000909",
+                "name": "addFillers",
+                "type": "ArrowFunctionExpression"
+            },
+            "vars": {
+                "fillerIndex": "<anonymous>~addFillers~fillerIndex",
+                "lastFillerPositions": "<anonymous>~addFillers~lastFillerPositions",
+                "row": "<anonymous>~addFillers~row",
+                "column": "<anonymous>~addFillers~column",
+                "gridColumnSpan": "<anonymous>~addFillers~gridColumnSpan",
+                "gridRowSpan": "<anonymous>~addFillers~gridRowSpan",
+                "r": "<anonymous>~addFillers~r",
+                "rowSpanValid": "<anonymous>~addFillers~rowSpanValid",
+                "c": "<anonymous>~addFillers~c",
+                "filler": "<anonymous>~addFillers~filler",
+                "filler.style.display": "<anonymous>~addFillers~filler.style.display",
+                "filler.style.gridColumn": "<anonymous>~addFillers~filler.style.gridColumn",
+                "filler.style.gridRow": "<anonymous>~addFillers~filler.style.gridRow",
+                "swapPerformed": "<anonymous>~addFillers~swapPerformed",
+                "availableSwaps": "<anonymous>~addFillers~availableSwaps",
+                "": null,
+                "getNextPositionDistance": "<anonymous>~addFillers~getNextPositionDistance",
+                "getAverageSwapsDistance": "<anonymous>~addFillers~getAverageSwapsDistance",
+                "bestSwap": "<anonymous>~addFillers~bestSwap",
+                "originalGridColumn": "<anonymous>~addFillers~originalGridColumn",
+                "originalGridRow": "<anonymous>~addFillers~originalGridRow",
+                "bestSwap.style.gridColumn": "<anonymous>~addFillers~bestSwap.style.gridColumn",
+                "bestSwap.style.gridRow": "<anonymous>~addFillers~bestSwap.style.gridRow"
+            }
+        },
+        "undocumented": true,
+        "name": "addFillers",
+        "longname": "<anonymous>~addFillers",
+        "kind": "function",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                7897,
+                7912
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 238,
+            "columnno": 10,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000914",
+                "name": "fillerIndex",
+                "type": "Literal",
+                "value": 0
+            }
+        },
+        "undocumented": true,
+        "name": "fillerIndex",
+        "longname": "<anonymous>~addFillers~fillerIndex",
+        "kind": "member",
+        "memberof": "<anonymous>~addFillers",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                7924,
+                7948
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 239,
+            "columnno": 10,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000918",
+                "name": "lastFillerPositions",
+                "type": "ArrayExpression",
+                "value": "[]"
+            }
+        },
+        "undocumented": true,
+        "name": "lastFillerPositions",
+        "longname": "<anonymous>~addFillers~lastFillerPositions",
+        "kind": "member",
+        "memberof": "<anonymous>~addFillers",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                7966,
+                7973
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 241,
+            "columnno": 15,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000923",
+                "name": "row",
+                "type": "Literal",
+                "value": 0
+            }
+        },
+        "undocumented": true,
+        "name": "row",
+        "longname": "<anonymous>~addFillers~row",
+        "kind": "member",
+        "memberof": "<anonymous>~addFillers",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                8015,
+                8025
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 242,
+            "columnno": 17,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000934",
+                "name": "column",
+                "type": "Literal",
+                "value": 0
+            }
+        },
+        "undocumented": true,
+        "name": "column",
+        "longname": "<anonymous>~addFillers~column",
+        "kind": "member",
+        "memberof": "<anonymous>~addFillers",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                8120,
+                8138
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 244,
+            "columnno": 16,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000952",
+                "name": "gridColumnSpan",
+                "type": "Literal",
+                "value": 1
+            }
+        },
+        "undocumented": true,
+        "name": "gridColumnSpan",
+        "longname": "<anonymous>~addFillers~gridColumnSpan",
+        "kind": "member",
+        "memberof": "<anonymous>~addFillers",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                8156,
+                8171
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 245,
+            "columnno": 16,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000956",
+                "name": "gridRowSpan",
+                "type": "Literal",
+                "value": 1
+            }
+        },
+        "undocumented": true,
+        "name": "gridRowSpan",
+        "longname": "<anonymous>~addFillers~gridRowSpan",
+        "kind": "member",
+        "memberof": "<anonymous>~addFillers",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                8481,
+                8492
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 256,
+            "columnno": 21,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000980",
+                "name": "r",
+                "type": "BinaryExpression",
+                "value": ""
+            }
+        },
+        "undocumented": true,
+        "name": "r",
+        "longname": "<anonymous>~addFillers~r",
+        "kind": "member",
+        "memberof": "<anonymous>~addFillers",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                8531,
+                8550
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 257,
+            "columnno": 18,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000992",
+                "name": "rowSpanValid",
+                "type": "Literal",
+                "value": true
+            }
+        },
+        "undocumented": true,
+        "name": "rowSpanValid",
+        "longname": "<anonymous>~addFillers~rowSpanValid",
+        "kind": "member",
+        "memberof": "<anonymous>~addFillers",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                8575,
+                8585
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 258,
+            "columnno": 23,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100000997",
+                "name": "c",
+                "type": "Identifier",
+                "value": "column"
+            }
+        },
+        "undocumented": true,
+        "name": "c",
+        "longname": "<anonymous>~addFillers~c",
+        "kind": "member",
+        "memberof": "<anonymous>~addFillers",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                8681,
+                8701
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 260,
+            "columnno": 18,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100001016",
+                "name": "rowSpanValid",
+                "type": "Literal",
+                "funcscope": "<anonymous>~addFillers",
+                "value": false,
+                "paramnames": []
+            }
+        },
+        "undocumented": true,
+        "name": "rowSpanValid",
+        "longname": "<anonymous>~addFillers~rowSpanValid",
+        "kind": "member",
+        "memberof": "<anonymous>~addFillers",
+        "scope": "inner"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                8896,
+                8902
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 270,
+            "columnno": 16,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100001029",
+                "name": "filler"
+            }
+        },
+        "undocumented": true,
+        "name": "filler",
+        "longname": "<anonymous>~addFillers~filler",
+        "kind": "member",
+        "memberof": "<anonymous>~addFillers",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                8995,
+                9045
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 273,
+            "columnno": 14,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100001041",
+                "name": "filler",
+                "type": "CallExpression",
+                "funcscope": "<anonymous>~addFillers",
+                "value": "",
+                "paramnames": []
+            }
+        },
+        "undocumented": true,
+        "name": "filler",
+        "longname": "<anonymous>~addFillers~filler",
+        "kind": "member",
+        "memberof": "<anonymous>~addFillers",
+        "scope": "inner"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                9125,
+                9178
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 275,
+            "columnno": 14,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100001053",
+                "name": "fillerIndex",
+                "type": "BinaryExpression",
+                "funcscope": "<anonymous>~addFillers",
+                "value": "",
+                "paramnames": []
+            }
+        },
+        "undocumented": true,
+        "name": "fillerIndex",
+        "longname": "<anonymous>~addFillers~fillerIndex",
+        "kind": "member",
+        "memberof": "<anonymous>~addFillers",
+        "scope": "inner"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                9194,
+                9224
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 276,
+            "columnno": 14,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100001065",
+                "name": "filler.style.display",
+                "type": "Literal",
+                "funcscope": "<anonymous>~addFillers",
+                "value": "block",
+                "paramnames": []
+            }
+        },
+        "undocumented": true,
+        "name": "style.display",
+        "longname": "<anonymous>~addFillers~filler.style.display",
+        "kind": "member",
+        "memberof": "<anonymous>~addFillers~filler",
+        "scope": "static"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                9323,
+                9361
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 279,
+            "columnno": 14,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100001074",
+                "name": "filler",
+                "type": "CallExpression",
+                "funcscope": "<anonymous>~addFillers",
+                "value": "",
+                "paramnames": []
+            }
+        },
+        "undocumented": true,
+        "name": "filler",
+        "longname": "<anonymous>~addFillers~filler",
+        "kind": "member",
+        "memberof": "<anonymous>~addFillers",
+        "scope": "inner"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                9440,
+                9506
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 283,
+            "columnno": 12,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100001090",
+                "name": "filler.style.gridColumn",
+                "type": "TemplateLiteral",
+                "funcscope": "<anonymous>~addFillers",
+                "value": "",
+                "paramnames": []
+            }
+        },
+        "undocumented": true,
+        "name": "style.gridColumn",
+        "longname": "<anonymous>~addFillers~filler.style.gridColumn",
+        "kind": "member",
+        "memberof": "<anonymous>~addFillers~filler",
+        "scope": "static"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                9520,
+                9577
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 284,
+            "columnno": 12,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100001105",
+                "name": "filler.style.gridRow",
+                "type": "TemplateLiteral",
+                "funcscope": "<anonymous>~addFillers",
+                "value": "",
+                "paramnames": []
+            }
+        },
+        "undocumented": true,
+        "name": "style.gridRow",
+        "longname": "<anonymous>~addFillers~filler.style.gridRow",
+        "kind": "member",
+        "memberof": "<anonymous>~addFillers~filler",
+        "scope": "static"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                9596,
+                9617
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 286,
+            "columnno": 16,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100001120",
+                "name": "swapPerformed",
+                "type": "Literal",
+                "value": false
+            }
+        },
+        "undocumented": true,
+        "name": "swapPerformed",
+        "longname": "<anonymous>~addFillers~swapPerformed",
+        "kind": "member",
+        "memberof": "<anonymous>~addFillers",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                9781,
+                10565
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 290,
+            "columnno": 20,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100001131",
+                "name": "availableSwaps",
+                "type": "CallExpression",
+                "value": ""
+            }
+        },
+        "undocumented": true,
+        "name": "availableSwaps",
+        "longname": "<anonymous>~addFillers~availableSwaps",
+        "kind": "constant",
+        "memberof": "<anonymous>~addFillers",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                9959,
+                10024
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 293,
+            "columnno": 24,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100001158",
+                "name": "gridColumnStart",
+                "type": "CallExpression",
+                "value": ""
+            }
+        },
+        "undocumented": true,
+        "name": "gridColumnStart",
+        "longname": "<anonymous>~gridColumnStart",
+        "kind": "constant",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                10050,
+                10109
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 294,
+            "columnno": 24,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100001174",
+                "name": "gridRowStart",
+                "type": "CallExpression",
+                "value": ""
+            }
+        },
+        "undocumented": true,
+        "name": "gridRowStart",
+        "longname": "<anonymous>~gridRowStart",
+        "kind": "constant",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                10135,
+                10212
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 295,
+            "columnno": 24,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100001190",
+                "name": "gridColumnEnd",
+                "type": "CallExpression",
+                "value": ""
+            }
+        },
+        "undocumented": true,
+        "name": "gridColumnEnd",
+        "longname": "<anonymous>~gridColumnEnd",
+        "kind": "constant",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                10238,
+                10309
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 296,
+            "columnno": 24,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100001212",
+                "name": "gridRowEnd",
+                "type": "CallExpression",
+                "value": ""
+            }
+        },
+        "undocumented": true,
+        "name": "gridRowEnd",
+        "longname": "<anonymous>~gridRowEnd",
+        "kind": "constant",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                10637,
+                10801
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 306,
+            "columnno": 22,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100001261",
+                "name": "getNextPositionDistance",
+                "type": "ArrowFunctionExpression"
+            }
+        },
+        "undocumented": true,
+        "name": "getNextPositionDistance",
+        "longname": "<anonymous>~addFillers~getNextPositionDistance",
+        "kind": "function",
+        "memberof": "<anonymous>~addFillers",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                10826,
+                11166
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 310,
+            "columnno": 22,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100001292",
+                "name": "getAverageSwapsDistance",
+                "type": "ArrowFunctionExpression"
+            },
+            "vars": {
+                "totalDistance": "<anonymous>~addFillers~getAverageSwapsDistance~totalDistance",
+                "": null
+            }
+        },
+        "undocumented": true,
+        "name": "getAverageSwapsDistance",
+        "longname": "<anonymous>~addFillers~getAverageSwapsDistance",
+        "kind": "function",
+        "memberof": "<anonymous>~addFillers",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                10950,
+                11092
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 312,
+            "columnno": 24,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100001307",
+                "name": "totalDistance",
+                "type": "CallExpression",
+                "value": ""
+            }
+        },
+        "undocumented": true,
+        "name": "totalDistance",
+        "longname": "<anonymous>~addFillers~getAverageSwapsDistance~totalDistance",
+        "kind": "constant",
+        "memberof": "<anonymous>~addFillers~getAverageSwapsDistance",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                11191,
+                11907
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 318,
+            "columnno": 22,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100001332",
+                "name": "bestSwap",
+                "type": "CallExpression",
+                "value": ""
+            }
+        },
+        "undocumented": true,
+        "name": "bestSwap",
+        "longname": "<anonymous>~addFillers~bestSwap",
+        "kind": "constant",
+        "memberof": "<anonymous>~addFillers",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                11269,
+                11519
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 319,
+            "columnno": 24,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100001343",
+                "name": "currentAvgDistance",
+                "type": "CallExpression",
+                "value": ""
+            }
+        },
+        "undocumented": true,
+        "name": "currentAvgDistance",
+        "longname": "<anonymous>~currentAvgDistance",
+        "kind": "constant",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                11357,
+                11419
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 320,
+            "columnno": 20,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100001349",
+                "name": "column",
+                "type": "BinaryExpression",
+                "value": ""
+            }
+        },
+        "undocumented": true,
+        "name": "column",
+        "longname": "column",
+        "kind": "member",
+        "scope": "global"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                11441,
+                11497
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 321,
+            "columnno": 20,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100001365",
+                "name": "row",
+                "type": "BinaryExpression",
+                "value": ""
+            }
+        },
+        "undocumented": true,
+        "name": "row",
+        "longname": "row",
+        "kind": "member",
+        "scope": "global"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                11546,
+                11787
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 324,
+            "columnno": 24,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100001382",
+                "name": "bestAvgDistance",
+                "type": "CallExpression",
+                "value": ""
+            }
+        },
+        "undocumented": true,
+        "name": "bestAvgDistance",
+        "longname": "<anonymous>~bestAvgDistance",
+        "kind": "constant",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                11631,
+                11690
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 325,
+            "columnno": 20,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100001388",
+                "name": "column",
+                "type": "BinaryExpression",
+                "value": ""
+            }
+        },
+        "undocumented": true,
+        "name": "column",
+        "longname": "column",
+        "kind": "member",
+        "scope": "global"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                11712,
+                11765
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 326,
+            "columnno": 20,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100001404",
+                "name": "row",
+                "type": "BinaryExpression",
+                "value": ""
+            }
+        },
+        "undocumented": true,
+        "name": "row",
+        "longname": "row",
+        "kind": "member",
+        "scope": "global"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                11932,
+                11978
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 332,
+            "columnno": 22,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100001431",
+                "name": "originalGridColumn",
+                "type": "MemberExpression",
+                "value": "bestSwap.style.gridColumn"
+            }
+        },
+        "undocumented": true,
+        "name": "originalGridColumn",
+        "longname": "<anonymous>~addFillers~originalGridColumn",
+        "kind": "constant",
+        "memberof": "<anonymous>~addFillers",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                12002,
+                12042
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 333,
+            "columnno": 22,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100001439",
+                "name": "originalGridRow",
+                "type": "MemberExpression",
+                "value": "bestSwap.style.gridRow"
+            }
+        },
+        "undocumented": true,
+        "name": "originalGridRow",
+        "longname": "<anonymous>~addFillers~originalGridRow",
+        "kind": "constant",
+        "memberof": "<anonymous>~addFillers",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                12060,
+                12111
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 334,
+            "columnno": 16,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100001447",
+                "name": "bestSwap.style.gridColumn",
+                "type": "MemberExpression",
+                "funcscope": "<anonymous>~addFillers",
+                "value": "filler.style.gridColumn",
+                "paramnames": []
+            }
+        },
+        "undocumented": true,
+        "name": "style.gridColumn",
+        "longname": "<anonymous>~addFillers~bestSwap.style.gridColumn",
+        "kind": "member",
+        "memberof": "<anonymous>~addFillers~bestSwap",
+        "scope": "static"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                12129,
+                12174
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 335,
+            "columnno": 16,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100001459",
+                "name": "bestSwap.style.gridRow",
+                "type": "MemberExpression",
+                "funcscope": "<anonymous>~addFillers",
+                "value": "filler.style.gridRow",
+                "paramnames": []
+            }
+        },
+        "undocumented": true,
+        "name": "style.gridRow",
+        "longname": "<anonymous>~addFillers~bestSwap.style.gridRow",
+        "kind": "member",
+        "memberof": "<anonymous>~addFillers~bestSwap",
+        "scope": "static"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                12192,
+                12236
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 336,
+            "columnno": 16,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100001471",
+                "name": "filler.style.gridColumn",
+                "type": "Identifier",
+                "funcscope": "<anonymous>~addFillers",
+                "value": "originalGridColumn",
+                "paramnames": []
+            }
+        },
+        "undocumented": true,
+        "name": "style.gridColumn",
+        "longname": "<anonymous>~addFillers~filler.style.gridColumn",
+        "kind": "member",
+        "memberof": "<anonymous>~addFillers~filler",
+        "scope": "static"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                12254,
+                12292
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 337,
+            "columnno": 16,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100001479",
+                "name": "filler.style.gridRow",
+                "type": "Identifier",
+                "funcscope": "<anonymous>~addFillers",
+                "value": "originalGridRow",
+                "paramnames": []
+            }
+        },
+        "undocumented": true,
+        "name": "style.gridRow",
+        "longname": "<anonymous>~addFillers~filler.style.gridRow",
+        "kind": "member",
+        "memberof": "<anonymous>~addFillers~filler",
+        "scope": "static"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                12356,
+                12417
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 340,
+            "columnno": 18,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100001492",
+                "name": "column",
+                "type": "BinaryExpression",
+                "value": ""
+            }
+        },
+        "undocumented": true,
+        "name": "column",
+        "longname": "column",
+        "kind": "member",
+        "scope": "global"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                12437,
+                12492
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 341,
+            "columnno": 18,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100001508",
+                "name": "row",
+                "type": "BinaryExpression",
+                "value": ""
+            }
+        },
+        "undocumented": true,
+        "name": "row",
+        "longname": "row",
+        "kind": "member",
+        "scope": "global"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                12530,
+                12550
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 343,
+            "columnno": 16,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100001525",
+                "name": "swapPerformed",
+                "type": "Literal",
+                "funcscope": "<anonymous>~addFillers",
+                "value": true,
+                "paramnames": []
+            }
+        },
+        "undocumented": true,
+        "name": "swapPerformed",
+        "longname": "<anonymous>~addFillers~swapPerformed",
+        "kind": "member",
+        "memberof": "<anonymous>~addFillers",
+        "scope": "inner"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                12800,
+                12836
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 359,
+            "columnno": 4,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100001547",
+                "name": "this.prevTotalColumns",
+                "type": "Identifier",
+                "value": "totalColumns",
+                "paramnames": []
+            }
+        },
+        "undocumented": true,
+        "name": "prevTotalColumns",
+        "longname": "BentoGrid#prevTotalColumns",
+        "kind": "member",
+        "memberof": "BentoGrid",
+        "scope": "instance"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                12883,
+                13691
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 364,
+            "columnno": 2,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100001557",
+                "name": "BentoGrid#handleResponsiveBehavior",
+                "type": "MethodDefinition",
+                "paramnames": []
+            },
+            "vars": {
+                "": null
+            }
+        },
+        "undocumented": true,
+        "name": "handleResponsiveBehavior",
+        "longname": "BentoGrid#handleResponsiveBehavior",
+        "kind": "function",
+        "memberof": "BentoGrid",
+        "scope": "instance",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                12922,
+                13272
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 365,
+            "columnno": 10,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100001562",
+                "name": "onResize",
+                "type": "ArrowFunctionExpression"
+            },
+            "vars": {
+                "this.resizeObserver._timeoutId": "<anonymous>#resizeObserver._timeoutId",
+                "": null
+            }
+        },
+        "undocumented": true,
+        "name": "onResize",
+        "longname": "<anonymous>~onResize",
+        "kind": "function",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                12999,
+                13265
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 367,
+            "columnno": 6,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100001575",
+                "name": "this.resizeObserver._timeoutId",
+                "type": "CallExpression",
+                "value": "",
+                "paramnames": []
+            }
+        },
+        "undocumented": true,
+        "name": "_timeoutId",
+        "longname": "<anonymous>#resizeObserver._timeoutId",
+        "kind": "member",
+        "memberof": "<anonymous>#resizeObserver",
+        "scope": "static"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                13065,
+                13102
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 368,
+            "columnno": 14,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100001586",
+                "name": "currentColumnCount",
+                "type": "CallExpression",
+                "value": ""
+            }
+        },
+        "undocumented": true,
+        "name": "currentColumnCount",
+        "longname": "<anonymous>~currentColumnCount",
+        "kind": "constant",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                13210,
+                13251
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 372,
+            "columnno": 8,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100001605",
+                "name": "this.prevColumnCount",
+                "type": "Identifier",
+                "value": "currentColumnCount",
+                "paramnames": []
+            }
+        },
+        "undocumented": true,
+        "name": "prevColumnCount",
+        "longname": "<anonymous>#prevColumnCount",
+        "kind": "member",
+        "memberof": "<anonymous>",
+        "scope": "instance"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                13337,
+                13555
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 377,
+            "columnno": 6,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100001621",
+                "name": "this.resizeObserver",
+                "type": "ObjectExpression",
+                "value": "{\"observe\":\"\",\"unobserve\":\"\"}",
+                "paramnames": []
+            }
+        },
+        "undocumented": true,
+        "name": "resizeObserver",
+        "longname": "BentoGrid#resizeObserver",
+        "kind": "member",
+        "memberof": "BentoGrid",
+        "scope": "instance"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                13369,
+                13450
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 378,
+            "columnno": 8,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100001626",
+                "name": "observe",
+                "type": "ArrowFunctionExpression"
+            }
+        },
+        "undocumented": true,
+        "name": "observe",
+        "longname": "BentoGrid#resizeObserver.observe",
+        "kind": "function",
+        "memberof": "BentoGrid#resizeObserver",
+        "scope": "static"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                13460,
+                13546
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 381,
+            "columnno": 8,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100001636",
+                "name": "unobserve",
+                "type": "ArrowFunctionExpression"
+            }
+        },
+        "undocumented": true,
+        "name": "unobserve",
+        "longname": "BentoGrid#resizeObserver.unobserve",
+        "kind": "function",
+        "memberof": "BentoGrid#resizeObserver",
+        "scope": "static"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                13576,
+                13626
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 386,
+            "columnno": 6,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100001648",
+                "name": "this.resizeObserver",
+                "type": "NewExpression",
+                "value": "",
+                "paramnames": []
+            }
+        },
+        "undocumented": true,
+        "name": "resizeObserver",
+        "longname": "BentoGrid#resizeObserver",
+        "kind": "member",
+        "memberof": "BentoGrid",
+        "scope": "instance"
+    },
+    {
+        "comment": "/**\n   * Recalculate the grid layout.\n   * Useful for cases when elements are added, removed, or visibility changes.\n   */",
+        "meta": {
+            "range": [
+                13820,
+                13886
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 396,
+            "columnno": 2,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100001665",
+                "name": "BentoGrid#recalculate",
+                "type": "MethodDefinition",
+                "paramnames": []
+            },
+            "vars": {
+                "": null
+            }
+        },
+        "description": "Recalculate the grid layout.\nUseful for cases when elements are added, removed, or visibility changes.",
+        "name": "recalculate",
+        "longname": "BentoGrid#recalculate",
+        "kind": "function",
+        "memberof": "BentoGrid",
+        "scope": "instance",
+        "params": []
+    },
+    {
+        "comment": "/**\n   * Emits a \"calculationDone\" event when the grid calculation is completed.\n   * @method\n   * @emits {CustomEvent} calculationDone - The event object contains a \"detail\" property with the gridContainer as a property.\n   */",
+        "meta": {
+            "range": [
+                14120,
+                14358
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 406,
+            "columnno": 2,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100001679",
+                "name": "BentoGrid#emitCalculationDoneEvent",
+                "type": "MethodDefinition",
+                "paramnames": []
+            },
+            "vars": {
+                "": null
+            }
+        },
+        "description": "Emits a \"calculationDone\" event when the grid calculation is completed.",
+        "kind": "function",
+        "fires": [
+            "event:{CustomEvent} calculationDone - The event object contains a \"detail\" property with the gridContainer as a property."
+        ],
+        "name": "emitCalculationDoneEvent",
+        "longname": "BentoGrid#emitCalculationDoneEvent",
+        "memberof": "BentoGrid",
+        "scope": "instance",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                14159,
+                14293
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 407,
+            "columnno": 10,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100001684",
+                "name": "calculationDoneEvent",
+                "type": "NewExpression",
+                "value": ""
+            }
+        },
+        "undocumented": true,
+        "name": "calculationDoneEvent",
+        "longname": "<anonymous>~calculationDoneEvent",
+        "kind": "constant",
+        "memberof": "<anonymous>",
+        "scope": "inner",
+        "params": []
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                14225,
+                14285
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 408,
+            "columnno": 6,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100001690",
+                "name": "detail",
+                "type": "ObjectExpression",
+                "value": "{\"gridContainer\":\"\"}"
+            }
+        },
+        "undocumented": true,
+        "name": "detail",
+        "longname": "detail",
+        "kind": "member",
+        "scope": "global"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                14243,
+                14276
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 409,
+            "columnno": 8,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100001692",
+                "name": "gridContainer",
+                "type": "MemberExpression",
+                "value": "this.gridContainer"
+            }
+        },
+        "undocumented": true,
+        "name": "gridContainer",
+        "longname": "detail.gridContainer",
+        "kind": "member",
+        "memberof": "detail",
+        "scope": "static"
+    },
+    {
+        "comment": "",
+        "meta": {
+            "range": [
+                14362,
+                14387
+            ],
+            "filename": "BentoGrid.js",
+            "lineno": 416,
+            "columnno": 0,
+            "path": "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core",
+            "code": {
+                "id": "astnode100001704",
+                "name": "module.exports",
+                "type": "Identifier"
+            }
+        },
+        "undocumented": true,
+        "name": "exports",
+        "longname": "module.exports",
+        "kind": "member",
+        "memberof": "module",
+        "scope": "static"
+    },
+    {
+        "kind": "package",
+        "longname": "package:undefined",
+        "files": [
+            "/Users/mbh/Documents/GitHub/bento-grid.js/packages/core/BentoGrid.js"
+        ]
+    }
+]

@@ -2,7 +2,7 @@
  * @typedef {Object} UserConfig
  * @property {string | HTMLElement} [target='.bentogrid'] - The target element to apply the grid to.
  * @property {number} [minCellWidth=100] - The minimum width of each cell in the grid.
- * @property {number} [columns] - The number of columns to use for the grid. This overrides minCellWidth.
+ * @property {number} [columns=undefined] - The number of columns to use for the grid. This overrides minCellWidth.
  * @property {number} [cellGap=0] - The space between each cell in the grid.
  * @property {number} [aspectRatio=1/1] - The aspect ratio of each cell in the grid.
  * @property {Object.<number, Breakpoint>} [breakpoints] - Breakpoints to set responsive grid behavior. minWidth looks at breakpointReference.
