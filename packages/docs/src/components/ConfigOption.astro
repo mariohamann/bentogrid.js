@@ -23,7 +23,7 @@ const option = JSDocs[0].properties?.find((p) => p.name === name);
 		>
 	</li>
 	{
-		!noDefault && option?.defaultvalue && (
+		!noDefault && option?.defaultvalue !== undefined && (
 			<li>
 				<b>Default:</b>
 				<code class='ml-2 before:contents after:contents'>
