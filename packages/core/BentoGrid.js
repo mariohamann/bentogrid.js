@@ -84,7 +84,6 @@ class BentoGrid {
       } else if (breakpoint.minCellWidth) {
         delete activeBreakpoint.columns;
       }
-      console.log(activeBreakpoint)
     }
 
     cleanupBreakpoint(activeBreakpoint)
@@ -109,8 +108,6 @@ class BentoGrid {
       (this.gridContainer.clientWidth + breakpoint.cellGap) /
       (breakpoint.minCellWidth + breakpoint.cellGap)
     );
-
-    console.log(breakpoint);
 
     // Configure the grid container styles
     this.gridContainer.style.display = "grid";
