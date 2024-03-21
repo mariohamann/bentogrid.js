@@ -1,8 +1,15 @@
 ---
 import Hero from "../partials/Hero.astro";
 import InstallationUsage from "../partials/InstallationUsage.astro";
+import GitHub from "../partials/GitHub.astro";
 import ElementsFillers from "../partials/ElementsFillers/ElementsFillers.astro";
 import ConfigOption from "../components/ConfigOption.astro";
+import ConfigTarget from "../partials/Config/Target.astro";
+import ConfigCellGap from "../partials/Config/CellGap.astro";
+import ConfigAspectRatio from "../partials/Config/AspectRatio.astro";
+import ConfigBalanceFillers from "../partials/Config/BalanceFillers.astro";
+import ConfigMinCellWidth from "../partials/Config/MinCellWidth.astro";
+import ConfigColumns from "../partials/Config/Columns.astro";
 
 import Footer from "../partials/Footer.astro";
 ---
@@ -37,11 +44,9 @@ import Footer from "../partials/Footer.astro";
 				font-family: "M PLUS 2";
 				font-style: normal;
 				font-weight: 400;
-				src: url("/fonts/m-plus-2-v6-latin-300.woff2")
-						format("woff2"),
+				src: url("/fonts/m-plus-2-v6-latin-300.woff2") format("woff2"),
 					/* Chrome 36+, Opera 23+, Firefox 39+ */
-						url("/fonts/m-plus-2-v6-latin-300.woff")
-						format("woff"); /* Chrome 5+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+						url("/fonts/m-plus-2-v6-latin-300.woff") format("woff"); /* Chrome 5+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 			}
 			/* m-plus-2-500 - latin */
 			@font-face {
@@ -49,11 +54,9 @@ import Footer from "../partials/Footer.astro";
 				font-family: "M PLUS 2";
 				font-style: normal;
 				font-weight: 600;
-				src: url("/fonts/m-plus-2-v6-latin-500.woff2")
-						format("woff2"),
+				src: url("/fonts/m-plus-2-v6-latin-500.woff2") format("woff2"),
 					/* Chrome 36+, Opera 23+, Firefox 39+ */
-						url("/fonts/m-plus-2-v6-latin-500.woff")
-						format("woff"); /* Chrome 5+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+						url("/fonts/m-plus-2-v6-latin-500.woff") format("woff"); /* Chrome 5+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 			}
 			.astro-code {
 				background-color: rgb(2 2 2) !important;
@@ -76,18 +79,19 @@ import Footer from "../partials/Footer.astro";
 	</head>
 	<body class='p-4 font-sans sm:p-6 md:p-8 lg:p-12 bg-sand-100'>
 		<Hero />
+		<GitHub />
 		<div class='prose prose-stone mx-auto mt-24'>
 			<InstallationUsage />
 			<hr />
 			<ElementsFillers />
 			<hr />
 			<h2 id='config'>UserConfig</h2>
-			<ConfigOption name='target' />
-			<ConfigOption name='cellGap' />
-			<ConfigOption name='aspectRatio' />
-			<ConfigOption name='balanceFillers' noDefault />
-			<ConfigOption name='minCellWidth' />
-			<ConfigOption name='columns' />
+			<ConfigTarget />
+			<ConfigCellGap />
+			<ConfigAspectRatio />
+			<ConfigBalanceFillers />
+			<ConfigMinCellWidth />
+			<ConfigColumns />
 			<ConfigOption name='breakpoints' />
 			<ConfigOption name='breakpointReference' />
 			<h2 id='config'>Breakpoint</h2>

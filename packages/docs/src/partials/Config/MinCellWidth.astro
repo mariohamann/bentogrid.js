@@ -1,29 +1,32 @@
 ---
 import { Code } from "astro/components";
 import GridCode from "../../components/GridCode.astro";
+import ConfigOption from "../../components/ConfigOption.astro";
 ---
 
-<h3>Example 2: Styled Fillers</h3>
-<p>In this example, fillers are automatically created and styled via CSS.</p>
+<ConfigOption name='minCellWidth' noDefault />
+<p></p>
 <script>
 	import BentoGrid from "@bentogrid/core";
 	new BentoGrid({
+		balanceFillers: true,
 		cellGap: 6,
-		target: "#bentogrid-elements-fillers-2",
-		columns: 8,
+		target: "#bentogrid-config-min-cell-width",
+		minCellWidth: 50,
 		aspectRatio: 1,
 	});
 </script>
 
 <GridCode
-	id='bentogrid-elements-fillers-2'
-	code={`#bentogrid > * {
-  @apply bg-sand-200;
-}
-#bentogrid .bento-filler {
-  @apply bg-black;
-}`}
-	lang='css'
+	id='bentogrid-config-min-cell-width'
+	code={`new BentoGrid({
+  minCellWidth: 50,
+  balanceFillers: true,
+  cellGap: 6,
+  target: "#bentogrid-config-min-cell-width,
+  aspectRatio: 1
+});`}
+	lang='js'
 >
 	<div data-bento='2x2'></div>
 	<div data-bento='1x1'></div>

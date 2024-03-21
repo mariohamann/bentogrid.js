@@ -1,0 +1,41 @@
+---
+import { Code } from "astro/components";
+import GridCode from "../../components/GridCode.astro";
+import ConfigOption from "../../components/ConfigOption.astro";
+---
+
+<ConfigOption name='aspectRatio' />
+<p>
+	In this example the cellGap is set to <code>9 / 16</code>, which means that
+	a single cell in the grid has a ratio of <code>9 / 16</code>. An element
+	taking up 2 columns and 1 row will have a ratio of about <code>18 / 16</code
+	>.
+</p>
+<script>
+	import BentoGrid from "@bentogrid/core";
+	new BentoGrid({
+		cellGap: 6,
+		target: "#bentogrid-config-aspect-ratio",
+		columns: 8,
+		aspectRatio: 9 / 16,
+	});
+</script>
+
+<GridCode
+	id='bentogrid-config-aspect-ratio'
+	code={`new BentoGrid({
+  aspectRatio: 9 / 16,
+  cellGap: 6,
+  target: "#bentogrid-config-aspect-ratio,
+  columns: 8,
+});`}
+	lang='js'
+>
+	<div data-bento='2x2'></div>
+	<div data-bento='1x1'></div>
+	<div data-bento='2x3'></div>
+	<div data-bento='2x1'></div>
+	<div data-bento='3x3'></div>
+	<div data-bento='1x4'></div>
+	<div data-bento='2x2'></div>
+</GridCode>

@@ -1,0 +1,72 @@
+---
+import { Code } from "astro/components";
+import GridCode from "../../components/GridCode.astro";
+import ConfigOption from "../../components/ConfigOption.astro";
+---
+
+<ConfigOption name='target' />
+<p>
+	In this example the element with the ID `bentogrid-config-target` is
+	targeted to initialize BentoGrid.
+</p>
+<script>
+	import BentoGrid from "@bentogrid/core";
+	new BentoGrid({
+		cellGap: 6,
+		target: "#bentogrid-config-target",
+		columns: 8,
+		aspectRatio: 1,
+	});
+</script>
+
+<GridCode
+	id='bentogrid-config-target'
+	code={`new BentoGrid({
+  target: "#bentogrid-config-target",
+  cellGap: 6,
+  columns: 8,
+  aspectRatio: 1,
+});`}
+	lang='js'
+>
+	<div data-bento='2x2'></div>
+	<div data-bento='1x1'></div>
+	<div data-bento='2x3'></div>
+	<div data-bento='2x1'></div>
+	<div data-bento='3x3'></div>
+	<div data-bento='1x4'></div>
+	<div data-bento='2x2'></div>
+</GridCode>
+
+<p>
+	As an alternative you can also pass the element directly to the `target`
+	option.
+</p>
+<script>
+	import BentoGrid from "@bentogrid/core";
+	new BentoGrid({
+		cellGap: 6,
+		target: document.getElementById("bentogrid-config-target-element"),
+		columns: 8,
+		aspectRatio: 1,
+	});
+</script>
+
+<GridCode
+	id='bentogrid-config-target-element'
+	code={`new BentoGrid({
+  target: document.getElementById("bentogrid-config-target-element"),
+  cellGap: 6,
+  columns: 8,
+  aspectRatio: 1,
+});`}
+	lang='js'
+>
+	<div data-bento='2x2'></div>
+	<div data-bento='1x1'></div>
+	<div data-bento='2x3'></div>
+	<div data-bento='2x1'></div>
+	<div data-bento='3x3'></div>
+	<div data-bento='1x4'></div>
+	<div data-bento='2x2'></div>
+</GridCode>
