@@ -28,8 +28,7 @@ A smart library that automatically positions elements depending on their size in
 
 * [BentoGrid](#BentoGrid)  
    * [new BentoGrid(userConfig)](#new%5FBentoGrid%5Fnew)  
-   * [.recalculate()](#BentoGrid+recalculate)  
-   * [.emitCalculationDoneEvent()](#BentoGrid+emitCalculationDoneEvent)
+   * [.recalculate()](#BentoGrid+recalculate)
 
 ### new BentoGrid(userConfig)
 
@@ -44,13 +43,6 @@ Create a new BentoGrid instance.
 Recalculate the grid layout. Useful for cases when elements are added, removed, or visibility changes.
 
 **Kind**: instance method of [`BentoGrid`](#BentoGrid)  
-
-### bentoGrid.emitCalculationDoneEvent()
-
-Emits a "calculationDone" event when the grid calculation is completed.
-
-**Kind**: instance method of [`BentoGrid`](#BentoGrid)  
-**Emits**: `event:{CustomEvent} calculationDone - The event object contains a "detail" property with the gridContainer as a property.`  
 
 ## UserConfig : `Object`
 
