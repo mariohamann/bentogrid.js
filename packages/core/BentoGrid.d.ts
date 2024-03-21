@@ -57,7 +57,7 @@ export type Breakpoint = {
  * @typedef {Object} UserConfig
  * @property {string | HTMLElement} [target='.bentogrid'] - The target element to apply the grid to.
  * @property {number} [minCellWidth=100] - The minimum width of each cell in the grid.
- * @property {number} [columns] - The number of columns to use for the grid. This overrides minCellWidth.
+ * @property {number} [columns=undefined] - The number of columns to use for the grid. This overrides minCellWidth.
  * @property {number} [cellGap=0] - The space between each cell in the grid.
  * @property {number} [aspectRatio=1/1] - The aspect ratio of each cell in the grid.
  * @property {Object.<number, Breakpoint>} [breakpoints] - Breakpoints to set responsive grid behavior. minWidth looks at breakpointReference.
@@ -118,48 +118,31 @@ declare class BentoGrid {
     fillers: any;
     prevTotalColumns: any;
     prevColumnCount: any;
-    setElements(): void;
-    getBreakpoint(): {
-        /**
-         * - The target element to apply the grid to.
-         */
-        target: string | HTMLElement;
-        /**
-         * - The minimum width of each cell in the grid.
-         */
-        minCellWidth: number;
-        /**
-         * - The number of columns to use for the grid. This overrides minCellWidth.
-         */
-        columns?: number;
-        /**
-         * - The space between each cell in the grid.
-         */
-        cellGap: number;
-        /**
-         * - The aspect ratio of each cell in the grid.
-         */
-        aspectRatio: number;
-        /**
-         * - Breakpoints to set responsive grid behavior. minWidth looks at breakpointReference.
-         */
-        breakpoints: {
-            [x: number]: Breakpoint;
-        };
-        /**
-         * - Select if the breakpoints should reference to the target's or the window's width.
-         */
-        breakpointReference: string;
-        /**
-         * - Whether to balance the position of the fillers. If set, they change their position with other elements.
-         */
-        balanceFillers: boolean;
-    };
-    setupGrid(): number;
-    hideOriginalFillers(): void;
-    removeClonedFillers(): void;
+    /**
+     * @private
+     */
+    private setElements;
+    /**
+     * @private
+     */
+    private getBreakpoint;
+    /**
+     * @private
+     */
+    private setupGrid;
+    /**
+     * @private
+     */
+    private hideOriginalFillers;
+    /**
+     * @private
+     */
+    private removeClonedFillers;
     updateGrid(): void;
-    handleResponsiveBehavior(): void;
+    /**
+     * @private
+     */
+    private handleResponsiveBehavior;
     resizeObserver: ResizeObserver | {
         observe: () => void;
         unobserve: () => void;
@@ -171,8 +154,10 @@ declare class BentoGrid {
     recalculate(): void;
     /**
      * Emits a "calculationDone" event when the grid calculation is completed.
+     * @private
+     *
      * @method
      * @emits {CustomEvent} calculationDone - The event object contains a "detail" property with the gridContainer as a property.
      */
-    emitCalculationDoneEvent(): void;
+    private emitCalculationDoneEvent;
 }

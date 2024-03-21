@@ -56,6 +56,9 @@ class BentoGrid {
     this.handleResponsiveBehavior();
   }
 
+  /**
+   * @private
+   */
   setElements() {
     // Grid items with the 'data-bento' attribute
     this.gridItems = Array
@@ -71,6 +74,10 @@ class BentoGrid {
       .filter(filler => !filler.style.gridColumn);
   }
 
+
+  /**
+   * @private
+   */
   getBreakpoint() {
     const width = this.config.breakpointReference === "target"
       ? this.gridContainer.clientWidth
@@ -100,6 +107,9 @@ class BentoGrid {
     return activeBreakpoint;
   }
 
+  /**
+   * @private
+   */
   setupGrid() {
     const breakpoint = this.getBreakpoint();
 
@@ -127,12 +137,18 @@ class BentoGrid {
     return totalColumns;
   }
 
+  /**
+   * @private
+   */
   hideOriginalFillers() {
     this.fillers.forEach((filler) => {
       filler.style.display = "none";
     });
   }
 
+  /**
+   * @private
+   */
   removeClonedFillers() {
     // Fillers that are visible
     Array.from(
@@ -358,6 +374,9 @@ class BentoGrid {
     this.emitCalculationDoneEvent();
   }
 
+  /**
+   * @private
+   */
   handleResponsiveBehavior() {
     const onResize = () => {
       clearTimeout(this.resizeObserver._timeoutId);
@@ -397,6 +416,8 @@ class BentoGrid {
 
   /**
    * Emits a "calculationDone" event when the grid calculation is completed.
+   * @private
+   * 
    * @method
    * @emits {CustomEvent} calculationDone - The event object contains a "detail" property with the gridContainer as a property.
    */
