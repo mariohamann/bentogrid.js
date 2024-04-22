@@ -38,7 +38,7 @@ jobs:
             - name: Install pnpm
               uses: pnpm/action-setup@v2
               with:
-                  version: 7
+                  version: 8.14.0
                   run_install: |
                       args: [--frozen-lockfile]
             - name: Install dependencies
